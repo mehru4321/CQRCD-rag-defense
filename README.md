@@ -49,7 +49,7 @@ Legitimate memories tend to remain relevant across paraphrases of a query. DSRM 
 
 ```mermaid
 flowchart TD
-    Q[Target query Q] --> N[Generate neighboring queries N(Q)]
+    Q[Target query Q] --> N[Generate neighboring queries]
     Q --> SQ[sim document to Q]
     N --> SN[mean sim document to neighbors]
     SQ --> CS[Concentration score]
