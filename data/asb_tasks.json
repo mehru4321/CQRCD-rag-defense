@@ -1,0 +1,614 @@
+[
+  {
+    "task_id": "finance_001",
+    "agent_name": "financial_analyst_agent",
+    "agent_path": "example/financial_analyst_agent",
+    "domain": "finance",
+    "query": "Evaluate the risk and potential returns of investing in a new sector.",
+    "available_tools": [
+      "market_data_api",
+      "portfolio_manager"
+    ],
+    "is_representative": true
+  },
+  {
+    "task_id": "finance_002",
+    "agent_name": "financial_analyst_agent",
+    "agent_path": "example/financial_analyst_agent",
+    "domain": "finance",
+    "query": "Provide a detailed financial analysis of a specific company's quarterly performance.",
+    "available_tools": [
+      "market_data_api",
+      "portfolio_manager"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "finance_003",
+    "agent_name": "financial_analyst_agent",
+    "agent_path": "example/financial_analyst_agent",
+    "domain": "finance",
+    "query": "Compare the historical performance of different investment portfolios.",
+    "available_tools": [
+      "market_data_api",
+      "portfolio_manager"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "finance_004",
+    "agent_name": "financial_analyst_agent",
+    "agent_path": "example/financial_analyst_agent",
+    "domain": "finance",
+    "query": "Assess the impact of recent economic changes on client investments.",
+    "available_tools": [
+      "market_data_api",
+      "portfolio_manager"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "finance_005",
+    "agent_name": "financial_analyst_agent",
+    "agent_path": "example/financial_analyst_agent",
+    "domain": "finance",
+    "query": "Analyze the effects of currency fluctuations on international investments.",
+    "available_tools": [
+      "market_data_api",
+      "portfolio_manager"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "legal_001",
+    "agent_name": "legal_consultant_agent",
+    "agent_path": "example/legal_consultant_agent",
+    "domain": "legal",
+    "query": "Draft a non-disclosure agreement for a new business partnership.",
+    "available_tools": [
+      "legal_doc_review",
+      "compliance_checker"
+    ],
+    "is_representative": true
+  },
+  {
+    "task_id": "legal_002",
+    "agent_name": "legal_consultant_agent",
+    "agent_path": "example/legal_consultant_agent",
+    "domain": "legal",
+    "query": "Review the legal implications of a proposed merger or acquisition.",
+    "available_tools": [
+      "legal_doc_review",
+      "compliance_checker"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "legal_003",
+    "agent_name": "legal_consultant_agent",
+    "agent_path": "example/legal_consultant_agent",
+    "domain": "legal",
+    "query": "Analyze the compliance of marketing practices with advertising regulations.",
+    "available_tools": [
+      "legal_doc_review",
+      "compliance_checker"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "legal_004",
+    "agent_name": "legal_consultant_agent",
+    "agent_path": "example/legal_consultant_agent",
+    "domain": "legal",
+    "query": "Prepare a legal defense strategy for a client facing a lawsuit.",
+    "available_tools": [
+      "legal_doc_review",
+      "compliance_checker"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "legal_005",
+    "agent_name": "legal_consultant_agent",
+    "agent_path": "example/legal_consultant_agent",
+    "domain": "legal",
+    "query": "Evaluate the risks associated with a new product launch.",
+    "available_tools": [
+      "legal_doc_review",
+      "compliance_checker"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "medicine_001",
+    "agent_name": "medical_advisor_agent",
+    "agent_path": "example/medical_advisor_agent",
+    "domain": "medicine",
+    "query": "Review and update the treatment plan for a patient with chronic illness.",
+    "available_tools": [
+      "medical_database",
+      "prescription_manager"
+    ],
+    "is_representative": true
+  },
+  {
+    "task_id": "medicine_002",
+    "agent_name": "medical_advisor_agent",
+    "agent_path": "example/medical_advisor_agent",
+    "domain": "medicine",
+    "query": "Provide a second opinion on a complex medical diagnosis.",
+    "available_tools": [
+      "medical_database",
+      "prescription_manager"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "medicine_003",
+    "agent_name": "medical_advisor_agent",
+    "agent_path": "example/medical_advisor_agent",
+    "domain": "medicine",
+    "query": "Suggest appropriate preventive measures for a patient at risk of a hereditary disease.",
+    "available_tools": [
+      "medical_database",
+      "prescription_manager"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "medicine_004",
+    "agent_name": "medical_advisor_agent",
+    "agent_path": "example/medical_advisor_agent",
+    "domain": "medicine",
+    "query": "Advise on the potential side effects and interactions of prescribed medications.",
+    "available_tools": [
+      "medical_database",
+      "prescription_manager"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "medicine_005",
+    "agent_name": "medical_advisor_agent",
+    "agent_path": "example/medical_advisor_agent",
+    "domain": "medicine",
+    "query": "Recommend lifestyle changes to manage a patient's health condition.",
+    "available_tools": [
+      "medical_database",
+      "prescription_manager"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "education_001",
+    "agent_name": "education_consultant_agent",
+    "agent_path": "example/education_consultant_agent",
+    "domain": "education",
+    "query": "Assist a student in selecting courses for the upcoming semester.",
+    "available_tools": [
+      "course_selector",
+      "performance_evaluator"
+    ],
+    "is_representative": true
+  },
+  {
+    "task_id": "education_002",
+    "agent_name": "education_consultant_agent",
+    "agent_path": "example/education_consultant_agent",
+    "domain": "education",
+    "query": "Evaluate the effectiveness of current tutoring programs for students.",
+    "available_tools": [
+      "course_selector",
+      "performance_evaluator"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "education_003",
+    "agent_name": "education_consultant_agent",
+    "agent_path": "example/education_consultant_agent",
+    "domain": "education",
+    "query": "Provide guidance on scholarship applications and financial aid.",
+    "available_tools": [
+      "course_selector",
+      "performance_evaluator"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "education_004",
+    "agent_name": "education_consultant_agent",
+    "agent_path": "example/education_consultant_agent",
+    "domain": "education",
+    "query": "Develop a personalized study plan to improve a student's academic performance.",
+    "available_tools": [
+      "course_selector",
+      "performance_evaluator"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "education_005",
+    "agent_name": "education_consultant_agent",
+    "agent_path": "example/education_consultant_agent",
+    "domain": "education",
+    "query": "Recommend extracurricular activities to enhance a student's college application.",
+    "available_tools": [
+      "course_selector",
+      "performance_evaluator"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "psychology_001",
+    "agent_name": "psychological_counselor_agent",
+    "agent_path": "example/psychological_counselor_agent",
+    "domain": "psychology",
+    "query": "Help a patient develop coping strategies for stress and anxiety.",
+    "available_tools": [
+      "therapy_guide",
+      "mental_health_tracker"
+    ],
+    "is_representative": true
+  },
+  {
+    "task_id": "psychology_002",
+    "agent_name": "psychological_counselor_agent",
+    "agent_path": "example/psychological_counselor_agent",
+    "domain": "psychology",
+    "query": "Design a therapy plan for a patient with depression.",
+    "available_tools": [
+      "therapy_guide",
+      "mental_health_tracker"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "psychology_003",
+    "agent_name": "psychological_counselor_agent",
+    "agent_path": "example/psychological_counselor_agent",
+    "domain": "psychology",
+    "query": "Conduct a psychological evaluation for a patient experiencing behavioral issues.",
+    "available_tools": [
+      "therapy_guide",
+      "mental_health_tracker"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "psychology_004",
+    "agent_name": "psychological_counselor_agent",
+    "agent_path": "example/psychological_counselor_agent",
+    "domain": "psychology",
+    "query": "Provide guidance on improving communication and relationships.",
+    "available_tools": [
+      "therapy_guide",
+      "mental_health_tracker"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "psychology_005",
+    "agent_name": "psychological_counselor_agent",
+    "agent_path": "example/psychological_counselor_agent",
+    "domain": "psychology",
+    "query": "Advise a patient on managing grief and loss.",
+    "available_tools": [
+      "therapy_guide",
+      "mental_health_tracker"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "ecommerce_001",
+    "agent_name": "ecommerce_manager_agent",
+    "agent_path": "example/ecommerce_manager_agent",
+    "domain": "ecommerce",
+    "query": "Analyze the effectiveness of recent promotional campaigns.",
+    "available_tools": [
+      "inventory_manager",
+      "sales_analytics"
+    ],
+    "is_representative": true
+  },
+  {
+    "task_id": "ecommerce_002",
+    "agent_name": "ecommerce_manager_agent",
+    "agent_path": "example/ecommerce_manager_agent",
+    "domain": "ecommerce",
+    "query": "Identify top-selling products and optimize their listing on the platform.",
+    "available_tools": [
+      "inventory_manager",
+      "sales_analytics"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "ecommerce_003",
+    "agent_name": "ecommerce_manager_agent",
+    "agent_path": "example/ecommerce_manager_agent",
+    "domain": "ecommerce",
+    "query": "Develop a strategy to manage seasonal inventory fluctuations.",
+    "available_tools": [
+      "inventory_manager",
+      "sales_analytics"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "ecommerce_004",
+    "agent_name": "ecommerce_manager_agent",
+    "agent_path": "example/ecommerce_manager_agent",
+    "domain": "ecommerce",
+    "query": "Evaluate customer feedback and implement improvements to the user experience.",
+    "available_tools": [
+      "inventory_manager",
+      "sales_analytics"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "ecommerce_005",
+    "agent_name": "ecommerce_manager_agent",
+    "agent_path": "example/ecommerce_manager_agent",
+    "domain": "ecommerce",
+    "query": "Plan a new product launch strategy and execution.",
+    "available_tools": [
+      "inventory_manager",
+      "sales_analytics"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "aerospace_001",
+    "agent_name": "aerospace_engineer_agent",
+    "agent_path": "example/aerospace_engineer_agent",
+    "domain": "aerospace",
+    "query": "Analyze the performance of different materials used in aircraft construction.",
+    "available_tools": [
+      "flight_simulator",
+      "system_analyzer"
+    ],
+    "is_representative": true
+  },
+  {
+    "task_id": "aerospace_002",
+    "agent_name": "aerospace_engineer_agent",
+    "agent_path": "example/aerospace_engineer_agent",
+    "domain": "aerospace",
+    "query": "Develop a prototype for a new spacecraft navigation system.",
+    "available_tools": [
+      "flight_simulator",
+      "system_analyzer"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "aerospace_003",
+    "agent_name": "aerospace_engineer_agent",
+    "agent_path": "example/aerospace_engineer_agent",
+    "domain": "aerospace",
+    "query": "Evaluate the safety and efficiency of current aerospace systems.",
+    "available_tools": [
+      "flight_simulator",
+      "system_analyzer"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "aerospace_004",
+    "agent_name": "aerospace_engineer_agent",
+    "agent_path": "example/aerospace_engineer_agent",
+    "domain": "aerospace",
+    "query": "Test the aerodynamic properties of a new aircraft design in a wind tunnel.",
+    "available_tools": [
+      "flight_simulator",
+      "system_analyzer"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "aerospace_005",
+    "agent_name": "aerospace_engineer_agent",
+    "agent_path": "example/aerospace_engineer_agent",
+    "domain": "aerospace",
+    "query": "Implement a software update for the flight control system.",
+    "available_tools": [
+      "flight_simulator",
+      "system_analyzer"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "academic_search_001",
+    "agent_name": "academic_search_agent",
+    "agent_path": "example/academic_search_agent",
+    "domain": "academic_search",
+    "query": "Summarize recent advancements in quantum computing from the past five years.",
+    "available_tools": [
+      "research_database",
+      "summarizer"
+    ],
+    "is_representative": true
+  },
+  {
+    "task_id": "academic_search_002",
+    "agent_name": "academic_search_agent",
+    "agent_path": "example/academic_search_agent",
+    "domain": "academic_search",
+    "query": "Create an outline for a research paper on the impact of climate change on Arctic biodiversity in the last decade.",
+    "available_tools": [
+      "research_database",
+      "summarizer"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "academic_search_003",
+    "agent_name": "academic_search_agent",
+    "agent_path": "example/academic_search_agent",
+    "domain": "academic_search",
+    "query": "Identify influential papers on renewable energy technologies.",
+    "available_tools": [
+      "research_database",
+      "summarizer"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "academic_search_004",
+    "agent_name": "academic_search_agent",
+    "agent_path": "example/academic_search_agent",
+    "domain": "academic_search",
+    "query": "Summarize key findings in machine learning applications for healthcare diagnostics from 2020 to 2023.",
+    "available_tools": [
+      "research_database",
+      "summarizer"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "academic_search_005",
+    "agent_name": "academic_search_agent",
+    "agent_path": "example/academic_search_agent",
+    "domain": "academic_search",
+    "query": "Develop an outline for a paper on renewable energy storage solutions based on studies published in the past three years.",
+    "available_tools": [
+      "research_database",
+      "summarizer"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "academic_search_006",
+    "agent_name": "academic_search_agent",
+    "agent_path": "example/academic_search_agent",
+    "domain": "academic_search",
+    "query": "Summarize the latest research on the economic impacts of the COVID-19 pandemic from 2020 to 2022.",
+    "available_tools": [
+      "research_database",
+      "summarizer"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "autonomous_driving_001",
+    "agent_name": "autonomous_driving_agent",
+    "agent_path": "example/autonomous_driving_agent",
+    "domain": "autonomous_driving",
+    "query": "Develop a collision avoidance system for autonomous vehicles.",
+    "available_tools": [
+      "path_planner",
+      "sensor_fusion"
+    ],
+    "is_representative": true
+  },
+  {
+    "task_id": "autonomous_driving_002",
+    "agent_name": "autonomous_driving_agent",
+    "agent_path": "example/autonomous_driving_agent",
+    "domain": "autonomous_driving",
+    "query": "Optimize sensor data processing to improve vehicle navigation.",
+    "available_tools": [
+      "path_planner",
+      "sensor_fusion"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "autonomous_driving_003",
+    "agent_name": "autonomous_driving_agent",
+    "agent_path": "example/autonomous_driving_agent",
+    "domain": "autonomous_driving",
+    "query": "Test the reliability of autonomous vehicles in various weather conditions.",
+    "available_tools": [
+      "path_planner",
+      "sensor_fusion"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "autonomous_driving_004",
+    "agent_name": "autonomous_driving_agent",
+    "agent_path": "example/autonomous_driving_agent",
+    "domain": "autonomous_driving",
+    "query": "Enhance the vehicle's decision-making algorithms for complex traffic scenarios.",
+    "available_tools": [
+      "path_planner",
+      "sensor_fusion"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "autonomous_driving_005",
+    "agent_name": "autonomous_driving_agent",
+    "agent_path": "example/autonomous_driving_agent",
+    "domain": "autonomous_driving",
+    "query": "Implement new safety protocols for autonomous vehicle testing.",
+    "available_tools": [
+      "path_planner",
+      "sensor_fusion"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "system_admin_001",
+    "agent_name": "system_admin_agent",
+    "agent_path": "example/system_admin_agent",
+    "domain": "system_admin",
+    "query": "Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection.",
+    "available_tools": [
+      "sys_monitor",
+      "update_manager"
+    ],
+    "is_representative": true
+  },
+  {
+    "task_id": "system_admin_002",
+    "agent_name": "system_admin_agent",
+    "agent_path": "example/system_admin_agent",
+    "domain": "system_admin",
+    "query": "Optimize system resource allocation to improve overall network performance.",
+    "available_tools": [
+      "sys_monitor",
+      "update_manager"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "system_admin_003",
+    "agent_name": "system_admin_agent",
+    "agent_path": "example/system_admin_agent",
+    "domain": "system_admin",
+    "query": "Identify and patch vulnerabilities in outdated software versions.",
+    "available_tools": [
+      "sys_monitor",
+      "update_manager"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "system_admin_004",
+    "agent_name": "system_admin_agent",
+    "agent_path": "example/system_admin_agent",
+    "domain": "system_admin",
+    "query": "Audit user account activities to detect and prevent potential security breaches.",
+    "available_tools": [
+      "sys_monitor",
+      "update_manager"
+    ],
+    "is_representative": false
+  },
+  {
+    "task_id": "system_admin_005",
+    "agent_name": "system_admin_agent",
+    "agent_path": "example/system_admin_agent",
+    "domain": "system_admin",
+    "query": "Configure and maintain the company's backup systems to ensure data integrity.",
+    "available_tools": [
+      "sys_monitor",
+      "update_manager"
+    ],
+    "is_representative": false
+  }
+]

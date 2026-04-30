@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# Environments and secrets
+.env
+.venv/
+venv/
+cqrcd_env/
+
+# Model/checkpoint artifacts
+*.pt
+*.pth
+*.bin
+*.safetensors
+.cache/
+
+# Generated experiment outputs
+results/*
+!results/figures/
+!results/tables/
+!results/figures/.gitkeep
+!results/tables/.gitkeep
+
+# Large/generated ASB-derived data
+data/raw_asb/
+data/adversarial*.json
+
