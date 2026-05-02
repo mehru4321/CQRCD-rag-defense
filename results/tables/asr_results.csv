@@ -1,0 +1,5 @@
+defense,ASR_A,ASR_R,RR,detection_rate,FPR
+none,0.0,0.0,1.0,0.0,0.0
+ppl,0.0,0.0,1.0,0.95,0.025
+llm,0.0,0.0,1.0,1.0,0.0
+cqrcd,0.0,0.0,1.0,0.0,0.0

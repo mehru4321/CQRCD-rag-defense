@@ -1,139 +1,91 @@
-"""Sanity check script: encode small set of docs and compute concentration scores."""
-from modules.retriever import DenseRetriever
-from modules.knowledge_base import KnowledgeBase
-from modules.dsrm_simulator import DSRMSimulator
-from modules.neighbor_generator import NeighborGenerator
-from modules.cqrcd_filter import CQRCDFilter
-import matplotlib
-matplotlib.rcParams['figure.dpi'] = 400
-matplotlib.rcParams['savefig.dpi'] = 400
-import hashlib
-import numpy as np
+"""Experiment 1: concentration-score separation on the real dataset."""
+from __future__ import annotations
+
+import argparse
+
+import matplotlib.pyplot as plt
+import pandas as pd
+
+from experiments.common import (
+    build_cqrcd_filter,
+    ensure_output_dirs,
+    init_retriever,
+    load_dataset_bundle,
+    sample_for_smoke,
+    save_dataframe,
+    save_figure,
+    summarize_group,
+)
 
 
-def main():
-    # Instantiate retriever (MiniLM by default). This requires `sentence-transformers`.
-    try:
-        retriever = DenseRetriever('minilm')
-        print('Loaded DenseRetriever (MiniLM)')
-    except Exception as e:
-        # Fallback: deterministic MockRetriever so the experiment can run without
-        # heavy dependencies. This provides deterministic embeddings based on
-        # SHA1 hashing of the text.
-        print('DenseRetriever failed to load:', e)
+def score_documents(filter_model, docs, label):
+    rows = []
+    for doc in docs:
+        query = doc.get('target_query') or doc.get('source_query') or doc.get('text', '')
+        score = filter_model.compute_concentration_score(doc.get('text', doc.get('full_text', '')), query)
+        rows.append(
+            {
+                'doc_id': doc['id'],
+                'group': label,
+                'query': query,
+                'score': score,
+            }
+        )
+    return rows
 
-        class MockRetriever:
-            def __init__(self, dim: int = 384):
-                self.dim = dim
 
-            def _det_emb(self, text: str) -> np.ndarray:
-                # deterministic pseudo-random vector from SHA1
-                h = hashlib.sha1(text.encode()).digest()
-                seed = int.from_bytes(h[:4], 'big')
-                rng = np.random.RandomState(seed)
-                v = rng.randn(self.dim).astype('float32')
-                v /= np.linalg.norm(v) + 1e-8
-                return v
+def build_plot(df: pd.DataFrame):
+    fig, ax = plt.subplots(figsize=(7, 4))
+    for group in ['legitimate', 'blackbox', 'whitebox']:
+        subset = df[df['group'] == group]['score']
+        ax.hist(subset, bins=20, alpha=0.5, label=group, density=True)
+    ax.set_title('CQRCD concentration score distributions')
+    ax.set_xlabel('Concentration score')
+    ax.set_ylabel('Density')
+    ax.legend()
+    return fig
 
-            def encode_query(self, text: str) -> np.ndarray:
-                return self._det_emb(text)
 
-            def encode_document(self, text: str) -> np.ndarray:
-                return self._det_emb(text)
+def main() -> None:
+    parser = argparse.ArgumentParser(description='Run Experiment 1 concentration sanity check.')
+    parser.add_argument('--retriever', default='minilm', choices=['minilm', 'dpr'])
+    parser.add_argument('--smoke', action='store_true')
+    parser.add_argument('--output-dir', default='results')
+    args = parser.parse_args()
 
-            def encode_batch(self, texts, batch_size: int = 32):
-                return np.vstack([self._det_emb(t) for t in texts]).astype('float32')
+    outputs = ensure_output_dirs(args.output_dir)
+    bundle = load_dataset_bundle()
 
-            def similarity(self, a: np.ndarray, b: np.ndarray) -> float:
-                return float(np.dot(a, b))
+    legitimate = bundle['legitimate']
+    blackbox = bundle['blackbox']
+    whitebox = bundle['whitebox']
+    if args.smoke:
+        legitimate = sample_for_smoke(legitimate, limit=20)
+        blackbox = sample_for_smoke(blackbox, limit=40)
+        whitebox = sample_for_smoke(whitebox, limit=40)
 
-        retriever = MockRetriever(dim=384)
-        print('Using MockRetriever fallback (deterministic embeddings)')
-    try:
-        kb = KnowledgeBase(retriever)
-    except Exception as e:
-        print('KnowledgeBase (FAISS) failed to load:', e)
-        # Fallback: simple in-memory knowledge base using dot-product on
-        # retriever embeddings. Deterministic and lightweight for testing.
-        class MockKnowledgeBase:
-            def __init__(self, retriever):
-                self.retriever = retriever
-                self.docs = []
+    retriever = init_retriever(args.retriever)
+    filter_model = build_cqrcd_filter(retriever, smoke=args.smoke)
 
-            def add_documents(self, documents):
-                for doc in documents:
-                    d = dict(doc)
-                    text = d.get('text', d.get('full_text', ''))
-                    d['_emb'] = self.retriever.encode_document(text)
-                    self.docs.append(d)
+    score_rows = []
+    score_rows.extend(score_documents(filter_model, legitimate, 'legitimate'))
+    score_rows.extend(score_documents(filter_model, blackbox, 'blackbox'))
+    score_rows.extend(score_documents(filter_model, whitebox, 'whitebox'))
 
-            def retrieve(self, query, k=5):
-                q_emb = self.retriever.encode_query(query)
-                sims = []
-                for i, d in enumerate(self.docs):
-                    emb = d.get('_emb')
-                    score = float(np.dot(emb, q_emb))
-                    sims.append((score, i))
-                sims.sort(key=lambda x: x[0], reverse=True)
-                results = []
-                for score, idx in sims[:k]:
-                    doc = dict(self.docs[idx])
-                    doc['score'] = float(score)
-                    doc['index'] = int(idx)
-                    results.append(doc)
-                return results
+    scores_df = pd.DataFrame(score_rows)
+    summary_df = pd.DataFrame(
+        [
+            summarize_group(scores_df[scores_df['group'] == 'legitimate']['score'], 'legitimate'),
+            summarize_group(scores_df[scores_df['group'] == 'blackbox']['score'], 'blackbox'),
+            summarize_group(scores_df[scores_df['group'] == 'whitebox']['score'], 'whitebox'),
+        ]
+    )
 
-            def poison(self, adversarial_docs):
-                self.add_documents(adversarial_docs)
+    save_dataframe(summary_df, outputs['tables'] / 'concentration_summary.csv')
+    save_dataframe(scores_df, outputs['tables'] / 'concentration_scores.csv')
+    save_figure(build_plot(scores_df), outputs['figures'] / 'fig1_concentration_dist')
 
-            def reset(self):
-                self.docs = []
-
-            def get_document_by_id(self, doc_id):
-                for d in self.docs:
-                    if d.get('id') == doc_id:
-                        return d
-                return None
-
-        kb = MockKnowledgeBase(retriever)
-        print('Using MockKnowledgeBase fallback')
-    dsrm = DSRMSimulator()
-
-    # Wire NeighborGenerator to use the retriever for semantic filtering and
-    # request the T5 paraphrase model (lazy-loaded). Model download requires
-    # `transformers` and access to HuggingFace model weights.
-    ng = NeighborGenerator(model_name=None, retriever=retriever)
-    cq = CQRCDFilter(retriever, ng)
-
-    # create some dummy legitimate docs
-    legit_docs = []
-    for i in range(5):
-        legit_docs.append({'id': f'doc_leg_{i}', 'text': f'Legitimate document content about topic {i}', 'label': 'legitimate', 'tools_mentioned': ['RiskAssessmentTool']})
-    kb.add_documents(legit_docs)
-
-    # adversarial docs
-    adv_docs = []
-    for i in range(5):
-        adv_docs.append(dsrm.generate_blackbox('Evaluate the risk and potential returns of investing in a new sector', f'AttackTool{i}', 'do bad', ['RiskAssessmentTool']))
-    kb.add_documents(adv_docs)
-
-    query = 'Evaluate the risk and potential returns of investing in a new sector'
-
-    # Test neighbor generation (this will lazy-load T5 if available)
-    try:
-        paraphrases = ng.generate(query, n=5)
-        print('NeighborGenerator model_loaded:', getattr(ng, '_model_loaded', False))
-        print('Paraphrases:')
-        for p in paraphrases:
-            print(' -', p)
-    except Exception as e:
-        print('Neighbor generation failed:', e)
-
-    retrieved = kb.retrieve(query, k=10)
-    filtered, scores = cq.filter(query, retrieved, return_scores=True)
-    print('Retrieved:', [d['id'] for d in retrieved])
-    print('Scores:', scores)
-    print('Filtered:', [d['id'] for d in filtered])
+    print('Saved concentration summary and score distributions.')
 
 
 if __name__ == '__main__':

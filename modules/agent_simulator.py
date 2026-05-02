@@ -34,7 +34,7 @@ class RAGAgent:
         filtered = retrieved
         concentration_scores = None
         if self.defense is not None:
-            filtered, scores = self.defense.filter(query, retrieved, return_scores=True)
+            filtered, scores = self._apply_defense(query, retrieved)
             concentration_scores = scores
 
         selected_tool = self.llm.select_tool(filtered, available_tools)
@@ -49,6 +49,23 @@ class RAGAgent:
             'attack_tool_selected': attack_selected,
             'concentration_scores': concentration_scores
         }
+
+    def _apply_defense(self, query: str, retrieved: List[Dict]):
+        if hasattr(self.defense, 'filter_with_scores'):
+            return self.defense.filter_with_scores(query, retrieved)
+
+        try:
+            filtered, scores = self.defense.filter(query, retrieved, return_scores=True)
+            return filtered, scores
+        except TypeError:
+            pass
+
+        try:
+            filtered = self.defense.filter(query, retrieved)
+        except TypeError:
+            filtered = self.defense.filter(retrieved)
+
+        return filtered, None
 
     def evaluate_dataset(self, dataset: List[Dict], use_defense: bool = True) -> Dict:
         original_defense = self.defense

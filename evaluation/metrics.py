@@ -21,9 +21,13 @@ def compute_retrieval_rate(results: List[Dict]) -> float:
 def compute_detection_metrics(y_true: List[int], y_scores: List[float]) -> Dict:
     fpr, tpr, thresholds = _roc_curve(y_true, y_scores)
     auc = _auc(fpr, tpr)
+    optimal_threshold = compute_optimal_threshold(y_true, y_scores)
+    threshold_metrics = compute_threshold_metrics(y_true, y_scores, optimal_threshold)
     return {
         'auc': float(auc),
-        'roc_curve': (fpr, tpr, thresholds)
+        'roc_curve': (fpr, tpr, thresholds),
+        'optimal_threshold': float(optimal_threshold),
+        **threshold_metrics,
     }
 
 
@@ -32,6 +36,37 @@ def compute_optimal_threshold(y_true: List[int], y_scores: List[float]) -> float
     j_scores = tpr - fpr
     idx = int(np.argmax(j_scores))
     return float(thresholds[idx])
+
+
+def compute_threshold_metrics(y_true: List[int], y_scores: List[float], threshold: float) -> Dict:
+    y_true_arr = np.asarray(y_true, dtype=int)
+    y_scores_arr = np.asarray(y_scores, dtype=float)
+    preds = (y_scores_arr >= threshold).astype(int)
+
+    tp = int(((y_true_arr == 1) & (preds == 1)).sum())
+    fp = int(((y_true_arr == 0) & (preds == 1)).sum())
+    tn = int(((y_true_arr == 0) & (preds == 0)).sum())
+    fn = int(((y_true_arr == 1) & (preds == 0)).sum())
+
+    positives = max(1, int((y_true_arr == 1).sum()))
+    negatives = max(1, int((y_true_arr == 0).sum()))
+    precision = tp / max(1, tp + fp)
+    recall = tp / positives
+    f1 = 0.0 if precision + recall == 0 else 2 * precision * recall / (precision + recall)
+
+    return {
+        'threshold': float(threshold),
+        'fnr_at_threshold': fn / positives,
+        'fpr_at_threshold': fp / negatives,
+        'tpr_at_threshold': tp / positives,
+        'tnr_at_threshold': tn / negatives,
+        'precision_at_threshold': precision,
+        'f1_at_threshold': f1,
+        'tp': tp,
+        'fp': fp,
+        'tn': tn,
+        'fn': fn,
+    }
 
 
 def _roc_curve(y_true: List[int], y_scores: List[float]):

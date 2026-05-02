@@ -36,7 +36,8 @@ def main() -> None:
     adv_emb = embeddings[2:3]
     neighbor_query = 'Assess sector investment risks and potential returns'
     n_emb = model.encode([neighbor_query], normalize_embeddings=True, convert_to_numpy=True)
-    concentration = float(scores[0][0]) / max(float(np.dot(adv_emb, n_emb.T)), 1e-8)
+    sim_neighbor = float(np.dot(adv_emb, n_emb.T).item())
+    concentration = float(scores[0][0]) / max(sim_neighbor, 1e-8)
     print(f'Sample concentration score computed: {concentration:.3f}')
     print('\n=== All checks passed. Ready to implement. ===')
 
