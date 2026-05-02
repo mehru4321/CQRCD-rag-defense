@@ -30,18 +30,9 @@ Documents with concentration score above `tau_C = 1.65` are flagged and removed 
   <b>RAG agent under memory poisoning and CQRCD filtering</b>
 </p>
 
-```mermaid
-flowchart LR
-    U[User query] --> R[Dense retriever]
-    KB[(Knowledge base)]
-    A[DSRM poisoned memory] --> KB
-    KB --> R
-    R --> D[Top-K retrieved docs]
-    D --> C[CQRCD filter]
-    C -->|clean docs| L[LLM agent]
-    C -->|flagged docs| X[Remove from context]
-    L --> T[Tool selection]
-```
+<p align="center">
+  <img src="cqrcd_pipeline.png" width="900"/>
+</p>
 
 ## Core Idea
 
