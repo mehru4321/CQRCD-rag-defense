@@ -188,7 +188,14 @@ python test_local_setup.py
 python download_models.py
 python -m scripts.prepare_asb_data
 python -m experiments.run_sanity_check
+python -m experiments.run_roc_analysis
+python -m experiments.run_main_experiment
+python -m experiments.run_adaptive_attack
+python -m experiments.run_ablation
+python -m visualization.plot_results
 ```
+
+For faster wiring checks while you are debugging, every experiment runner also supports `--smoke`.
 
 To generate adversarial documents for every ASB task instead of the default 400-scenario plan:
 
@@ -297,4 +304,8 @@ url={https://openreview.net/forum?id=V4y0CpX4hK}
 
 ## Status
 
-The local RTX setup, data conversion, core detector modules, DSRM document generation, and scaffolded experiment entry points are in place. The next major work is to complete the experiment runners so the target graphs above are replaced by measured figures in `results/figures/`.
+The repository now includes dataset-backed experiment runners, shared output helpers, adaptive white-box generation, and figure regeneration from saved tables. The main remaining validation task is to run the full local environment end to end and collect measured outputs in `results/`.
+
+## Debugging Workflow
+
+Every meaningful implementation batch is logged in [changes.md](changes.md). Use it as the first stop when a regression appears or when you need to understand why a code path changed.

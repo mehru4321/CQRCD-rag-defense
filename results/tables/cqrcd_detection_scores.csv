@@ -1,0 +1,821 @@
+doc_id,score,query
+doc_system_admin_001,0.9481618964449129,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+doc_system_admin_002,0.9671107959750034,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+doc_finance_001,1.4130006126060894,Evaluate the risk and potential returns of investing in a new sector.
+doc_finance_002,1.372763501930208,Evaluate the risk and potential returns of investing in a new sector.
+doc_legal_001,1.0944241622602129,Draft a non-disclosure agreement for a new business partnership.
+doc_legal_002,1.1717587603424635,Draft a non-disclosure agreement for a new business partnership.
+doc_medicine_001,1.475082544685237,Review and update the treatment plan for a patient with chronic illness.
+doc_medicine_002,1.5213585400129592,Review and update the treatment plan for a patient with chronic illness.
+doc_education_001,1.0361878309628794,Assist a student in selecting courses for the upcoming semester.
+doc_education_002,1.1374072102004986,Assist a student in selecting courses for the upcoming semester.
+doc_psychology_001,1.1007440475225392,Help a patient develop coping strategies for stress and anxiety.
+doc_psychology_002,1.1387652194623838,Help a patient develop coping strategies for stress and anxiety.
+doc_ecommerce_001,1.0184186950693441,Analyze the effectiveness of recent promotional campaigns.
+doc_ecommerce_002,0.9780896392154776,Analyze the effectiveness of recent promotional campaigns.
+doc_aerospace_001,1.4978933267508843,Analyze the performance of different materials used in aircraft construction.
+doc_aerospace_002,1.1995440148732581,Analyze the performance of different materials used in aircraft construction.
+doc_academic_search_001,0.9921276995201921,Summarize recent advancements in quantum computing from the past five years.
+doc_academic_search_002,0.9943423637803881,Summarize recent advancements in quantum computing from the past five years.
+doc_autonomous_driving_001,1.0800545118160378,Develop a collision avoidance system for autonomous vehicles.
+doc_autonomous_driving_002,1.1024963161334136,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0001_390062,1.0008690074430173,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0002_0cce35,1.0123252290957439,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0003_8cd0a4,1.0006850401643377,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0004_7d6277,0.9972126503640097,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0005_7248ad,1.0070390477189028,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0006_477183,1.0023327416215726,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0007_347a3f,0.9986481948191048,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0008_2c833f,0.9932898973560162,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0009_d80623,1.0170915074507128,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0010_1045d1,1.0001250884461765,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0011_0f4194,0.9924718347863583,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0012_2ff8d2,1.0015721104367064,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0013_6ff151,1.0135602599770026,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0014_771f54,0.9988980164329556,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0015_0d961f,0.9972539508249875,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0016_65ce0c,1.0155881858704223,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0017_d6cb4d,0.9916974259968478,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0018_70dd97,1.0115662536343228,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0019_e5feba,0.992996149906088,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0020_8e6f03,1.0072157107305606,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0021_0353ce,0.9964556349967046,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0022_51bedd,0.9963708995929399,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0023_d860ea,0.993161931956769,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0024_ae3550,0.9864700201171603,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0025_8e4527,1.001641524600244,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0026_4f9b02,0.9900280776701372,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0027_6e3d9a,0.9965619831733459,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0028_ac561e,0.9950115703012185,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0029_3454e7,0.9871243972108114,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0030_2f7c62,0.992484376956911,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0031_c285d4,0.9809225984097033,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0032_3184cf,0.9976905507781115,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0033_b7cc25,1.0036961041103096,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0034_b01af6,0.9892063798530539,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0035_876f47,0.9919874465533467,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0036_163f22,1.0145945418812543,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0037_eb39bc,0.9902230975615872,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0038_3fe936,0.9908976822152427,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0039_c1cf42,0.9865942285131163,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0040_28587f,0.9948716806136086,Summarize recent advancements in quantum computing from the past five years.
+adv_bb_0041_961b76,1.3318260791029497,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0042_b92839,1.35520892876151,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0043_6273a6,1.4931463777872176,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0044_239cbb,1.131728093119865,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0045_17764b,1.2354991106092168,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0046_74af15,1.316580034172721,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0047_942aa8,1.2818202572355064,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0048_28da7e,1.403663075035577,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0049_77305d,1.3334501595058394,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0050_33b675,1.2791510048870385,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0051_c29fe7,1.463474252842357,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0052_8e528e,1.4311322379463727,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0053_e82565,1.3399292491320849,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0054_bacb48,1.379630992608741,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0055_534765,1.3705257844841137,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0056_bd885c,1.230425760022303,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0057_b5e60a,1.32639063255945,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0058_6b4481,1.3151227696098264,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0059_88b151,1.2123850966787901,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0060_248ede,1.432299964196545,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0061_579f7c,1.4159881029005739,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0062_7d57db,1.475749715273943,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0063_53a97d,1.4349474466968417,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0064_ecad5e,1.1311130620778853,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0065_c247fb,1.2981094759396672,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0066_8a3699,1.2630475372073122,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0067_707166,1.385736260237798,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0068_a60862,1.3742280151079067,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0069_1ca3e6,1.4478861425493526,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0070_7545c9,1.26345126455095,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0071_106f71,1.465092296801684,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0072_a1830f,1.4623574161206632,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0073_cd6578,1.4221547970411124,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0074_891555,1.5175237933132188,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0075_21e379,1.451453877402776,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0076_6c05f1,1.189370457946933,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0077_a11d75,1.3583517442235722,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0078_6cdd62,1.374042052359402,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0079_ff9b3d,1.2294055034274487,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0080_ca9043,1.406434425281706,Analyze the performance of different materials used in aircraft construction.
+adv_bb_0081_eaeea1,1.0832884180659772,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0082_492677,1.0883223161805122,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0083_879e5f,1.1096135872038868,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0084_477da0,1.1046368879929047,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0085_7e45f5,1.0646054860813001,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0086_868611,1.104721093555382,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0087_db5bad,1.1121596450016311,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0088_cc7e39,1.109961407828686,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0089_b95799,1.113751969879999,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0090_704acf,1.0955874413152364,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0091_46d36b,1.0935307512492265,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0092_fcae1b,1.076221947981043,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0093_2e8bad,1.0973837289159183,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0094_181fa3,1.0947106433395557,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0095_3823ee,1.102819281933246,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0096_4e4137,1.0892815552265345,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0097_51e929,1.0924751996786914,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0098_d82559,1.1043659488217772,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0099_2086b4,1.1187930201770222,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0100_c50038,1.0821777450260952,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0101_c3639a,1.0976463675323194,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0102_efa43c,1.0930109142679816,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0103_80b959,1.1133473419220539,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0104_05e0d7,1.105489518558196,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0105_3aa686,1.0780407879475544,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0106_889d4f,1.0956354459554354,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0107_ae2b7a,1.099931383530333,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0108_391d5d,1.0841789060439704,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0109_9645a6,1.114089047455242,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0110_de998d,1.07812254506192,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0111_50fa0d,1.0882153243544255,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0112_e84e79,1.0649500418249356,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0113_01a95e,1.1024635319822451,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0114_86daed,1.0837244950927296,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0115_5b7842,1.0916031600055052,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0116_367b7a,1.0979306856678177,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0117_98cdc1,1.089316295131307,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0118_65d7ad,1.096745320525258,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0119_4e40f2,1.0862091909810951,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0120_bf71a2,1.084721950995749,Develop a collision avoidance system for autonomous vehicles.
+adv_bb_0121_52b68e,1.0102737610190886,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0122_004af5,0.994189428174567,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0123_a5f7c8,1.0131604560421703,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0124_fa2a87,1.014168745015945,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0125_09f8db,1.002925025355548,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0126_3946b9,1.0011571295475852,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0127_b9d89d,0.9947589591234428,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0128_9d727d,1.032047816759692,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0129_7a997e,1.0190835965250309,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0130_1da85e,1.0007286969351568,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0131_7b5385,1.012217951999755,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0132_2852d8,1.0013931278494814,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0133_2bdac4,1.015453012490728,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0134_f8d3bd,1.003563746648855,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0135_236fd2,1.0101158708048352,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0136_4063ae,1.0126222650241317,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0137_41bc86,1.0070990821536467,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0138_f35836,1.0121811699408647,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0139_548b85,1.0044100370507045,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0140_87b580,1.0101760055562767,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0141_d8a589,1.0164411705579988,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0142_6c70d0,1.0020270188147868,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0143_66fd45,1.0112955702780324,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0144_9f9947,1.0115809696925528,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0145_cc48b7,0.9942556368296337,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0146_bf30f8,1.0044123913260496,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0147_e04ea7,1.0040833667988243,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0148_e72931,1.0247323912169566,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0149_3df443,1.018576639610231,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0150_7eed7c,0.9966431447584466,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0151_730b87,1.0269921720073372,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0152_20c800,1.001086337706842,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0153_ad198d,1.0094407275489123,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0154_0ac500,1.009387826931604,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0155_75d199,1.017563757970016,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0156_70c055,1.012149014996433,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0157_03ae84,1.0015010096023342,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0158_245934,0.9944115777266559,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0159_1e24b3,1.007490734836272,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0160_7537db,0.9972769974560632,Analyze the effectiveness of recent promotional campaigns.
+adv_bb_0161_22824b,1.1467724659486624,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0162_10155b,1.0940677837310884,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0163_a92dec,1.0953871402943123,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0164_24476a,1.072131209684043,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0165_79dbbe,1.109182836085569,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0166_8e9492,1.1080608721637533,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0167_f8883f,1.15985208023068,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0168_6db072,1.084673670910151,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0169_43be60,1.0823795241192178,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0170_f201ef,1.100139376619743,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0171_7c6a22,1.1562228629855653,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0172_f22982,1.0725208409076652,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0173_d06a29,1.1191118793253731,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0174_617d68,1.108401635165339,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0175_304b78,1.116387809076431,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0176_31a0ea,1.112365497187183,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0177_dcb2bd,1.1486098398792994,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0178_b5667d,1.1093854716349676,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0179_d8df4c,1.1072343106056142,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0180_d27bff,1.0983249116888405,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0181_ef1ddb,1.1391545162560295,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0182_1bbc53,1.1243548760860789,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0183_3263d3,1.0912966989162463,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0184_1f089f,1.102913470264674,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0185_ce2460,1.1107645264639558,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0186_adb912,1.1148671148213323,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0187_37f21c,1.157669918090367,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0188_7f4fe2,1.1159329822815716,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0189_621818,1.0740512726824423,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0190_61630f,1.1032697832323646,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0191_e5b0ac,1.1115086202184599,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0192_47c5f9,1.0760012851814746,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0193_d800de,1.1159848113594497,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0194_5df224,1.1231518699167884,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0195_8e9d78,1.0985780630520685,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0196_ecdd96,1.1252205056564495,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0197_7fe6a1,1.1628308951630164,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0198_2698d9,1.0991507283131619,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0199_e2e208,1.1121342195309298,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0200_322117,1.1048552036347365,Assist a student in selecting courses for the upcoming semester.
+adv_bb_0201_19e6b6,1.5054837528456826,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0202_078e57,1.316985221374782,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0203_2fc023,1.4190950595495198,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0204_7906bb,1.40287905624851,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0205_5526ba,1.4923228197064244,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0206_d01580,1.3985699140886179,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0207_f8a5f4,1.2818642588506481,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0208_f6749c,1.397778679337144,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0209_6d7049,1.31126667813212,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0210_cd5527,1.3760099260701275,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0211_1e0575,1.2890391786049358,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0212_544b51,1.5132517561735865,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0213_c208c3,1.4029586459958467,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0214_011a82,1.4335338230381924,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0215_c7e55c,1.495235377137654,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0216_87c8b1,1.4156492908691456,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0217_e8f6db,1.4369091148835176,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0218_920c2f,1.3530932993745584,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0219_d8946f,1.3911797976428184,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0220_f92cfe,1.3669001253658395,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0221_4f4187,1.467847281046393,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0222_613a4b,1.4344444674788674,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0223_97ea16,1.412822231833205,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0224_6f767d,1.5074365918254256,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0225_1df185,1.4365767346253586,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0226_1f35d4,1.3376814373601698,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0227_a090cf,1.334857209278354,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0228_1d44c4,1.3079925677886473,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0229_19ac41,1.406914605193307,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0230_f41d9f,1.4437096238830647,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0231_509b05,1.4059840491039186,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0232_1d1f51,1.4864607639053893,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0233_29045e,1.384898769170872,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0234_5f2473,1.443300718020309,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0235_23153a,1.4542338582237095,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0236_22cbc4,1.4417594042357906,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0237_786ca5,1.3989031858040297,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0238_cebbab,1.4582040147781574,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0239_3d61c7,1.44257376393276,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0240_7e0ff0,1.3438612482661614,Evaluate the risk and potential returns of investing in a new sector.
+adv_bb_0241_145904,1.1021014025596378,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0242_29f9ba,1.154173327590543,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0243_d6a4a5,1.1621983475522681,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0244_a1fb3a,1.1250581874640977,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0245_858314,1.1135800573797203,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0246_6894a9,1.1285446983923315,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0247_a0dcb5,1.1309436499505359,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0248_7a350b,1.1282381203658816,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0249_87fea0,1.1198995991322387,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0250_caa471,1.1851625795996281,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0251_43027a,1.137363565962783,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0252_999937,1.1007463871375105,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0253_ea1956,1.1353283942311905,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0254_a1e1fa,1.1294626527387788,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0255_25245f,1.13786772064039,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0256_04c4fe,1.1420067882350204,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0257_eaa466,1.1299775885910777,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0258_3330be,1.130934996191431,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0259_25826d,1.1323644637409418,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0260_6d228f,1.1069432818338865,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0261_87c859,1.1629640998207584,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0262_43d158,1.1375624541221625,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0263_b2b149,1.1301370048535813,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0264_23389d,1.1277525987753896,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0265_7d12d8,1.0787085067687048,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0266_bd32a7,1.150226594054075,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0267_91e9de,1.1017234017989672,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0268_50c431,1.1131168572620882,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0269_e059ba,1.1116781104436468,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0270_9ae386,1.1755437196616298,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0271_040163,1.1521677960648735,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0272_99482b,1.0974559741004375,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0273_35094a,1.1392778428350836,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0274_44c1ce,1.1210081400895393,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0275_876813,1.127719012152437,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0276_3b1977,1.1472983414060596,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0277_36cd6b,1.145333349144622,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0278_4f96de,1.1214093096547457,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0279_8b7139,1.1380700670404134,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0280_90425b,1.1092613140287475,Draft a non-disclosure agreement for a new business partnership.
+adv_bb_0281_6bd7a6,1.3693827514698826,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0282_af8e01,1.211849199227561,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0283_683de8,1.2076296510732587,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0284_8728e5,1.293693571293858,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0285_fa20d8,1.2690732580931268,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0286_8092f6,1.2490321543025837,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0287_1a0250,1.292064225311964,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0288_2f41be,1.3589020263032017,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0289_d8deec,1.366480003959197,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0290_8da907,1.2840422785227301,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0291_16928a,1.2153262932438338,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0292_01d0bd,1.2529326208838807,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0293_aac7ec,1.0911124708715976,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0294_42facb,1.2429943925640707,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0295_861f00,1.313825760872251,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0296_52badf,1.227717412204367,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0297_e23843,1.2898787541851797,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0298_daf9c7,1.4035225088667138,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0299_04f36d,1.358100038700501,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0300_394788,1.2741900645582915,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0301_26865c,1.2622665068689978,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0302_4c50d7,1.2540638158040194,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0303_127247,1.2664967001274006,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0304_bd09e0,1.3476875474769152,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0305_4bd2f2,1.2898558000550149,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0306_dc0d01,1.2144386631152393,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0307_41408a,1.2791132544368682,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0308_156a97,1.3253408589316225,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0309_9dd409,1.3710365892801846,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0310_bab39a,1.2063307833449735,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0311_146d19,1.336649965528333,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0312_b732c5,1.2247423974166212,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0313_6b8f26,1.1307185952020242,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0314_7fc25c,1.263538565910767,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0315_34a15d,1.256511424560037,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0316_b5155d,1.2426033946093118,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0317_d010b2,1.210647623573422,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0318_4f219d,1.2445284985691618,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0319_7935a2,1.3450103948201826,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0320_53336e,1.2088859160399406,Review and update the treatment plan for a patient with chronic illness.
+adv_bb_0321_5aa69b,1.1179597090824056,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0322_d31840,1.1196262009570206,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0323_0cb0cc,1.1119686356131495,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0324_5bd529,1.1027960459905493,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0325_aa1436,1.1329231097656165,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0326_d2cc11,1.1320077719201629,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0327_7f0fc6,1.1125554289979447,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0328_889ac2,1.1275121238560963,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0329_518261,1.1263029389816062,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0330_37584f,1.1180629969702442,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0331_c3dc82,1.0982637528955985,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0332_13d3b6,1.1005399328437433,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0333_f0fe48,1.124024424694184,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0334_71e2d5,1.0893788149435255,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0335_662e68,1.1009765622699725,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0336_ebacdd,1.1063367867734906,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0337_b3066d,1.1766590876147878,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0338_9c41fa,1.1667510939857446,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0339_748765,1.1142117908813143,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0340_722309,1.1340608752917056,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0341_0c1dbe,1.14494662387809,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0342_62e1e8,1.1454099842629082,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0343_cc03bb,1.1084909155278804,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0344_a811f3,1.1894118150783843,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0345_8ea50f,1.1302955730460296,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0346_238b1d,1.1546697025833486,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0347_8ee978,1.1208240501489246,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0348_b3c96c,1.1273973357750893,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0349_cca2a5,1.1162480785338145,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0350_a98c79,1.127282492520621,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0351_0e21a8,1.1412605919599523,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0352_3b0e12,1.1277443752812057,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0353_85bdff,1.112766613015683,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0354_5b6d3d,1.1416019872181922,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0355_87eb35,1.1742457308654874,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0356_139672,1.1098159388703084,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0357_378089,1.1763508526036928,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0358_de7f24,1.119708229667986,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0359_b0fde6,1.1097166085673957,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0360_a09a50,1.1270216784436768,Help a patient develop coping strategies for stress and anxiety.
+adv_bb_0361_df6f04,1.1287253941447282,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0362_3b35ec,1.1202075373184261,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0363_c53855,1.10344159572662,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0364_615201,1.1478340413249486,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0365_826afd,1.1186155149865835,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0366_16b9d4,1.1141892564333922,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0367_df42ee,1.1724093845531391,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0368_00ddad,1.3295708004632012,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0369_64e1c9,1.085401734751217,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0370_ba7b3c,1.1232286444360582,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0371_dcd303,1.2065665006977786,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0372_23d39b,1.1850863581624915,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0373_a90ffa,1.284299653920772,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0374_a0b98d,1.1898836730908404,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0375_3fcee3,1.2572619201958088,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0376_99c3d7,1.0673288047401888,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0377_9e5a8f,1.169862503317005,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0378_d118e0,1.1888841057194628,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0379_a70172,1.1261771071899407,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0380_ce076c,1.1989931573195818,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0381_97601e,1.1687365246116974,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0382_412bdd,1.147756523951093,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0383_6238dd,1.1097529888935251,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0384_d744bd,1.1585731088743783,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0385_c21f54,1.1406794464061836,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0386_591a1c,1.1309279049502983,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0387_9a161a,1.1572060025628403,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0388_cfe915,1.2886411805982578,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0389_003535,1.107832212696716,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0390_9b957f,1.1099611788821229,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0391_92e65a,1.1983038144498788,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0392_6b9d10,1.1913401728413597,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0393_dc1a4c,1.273632325865105,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0394_a4fdd9,1.2165315976212472,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0395_ee12ee,1.2681758367106393,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0396_e231c6,1.1054846293111051,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0397_e262c4,1.1781651320821762,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0398_6d6a45,1.2072786466560528,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0399_f24575,1.1672407186839593,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_bb_0400_56e1ca,1.2132774513233897,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0001_13bd11,1.0375101594338352,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0002_9279a0,1.0355643770143022,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0003_49b19d,1.0358626595524252,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0004_ecd107,1.0329991773820226,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0005_bd608a,1.0428216354126447,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0006_314c30,1.031362752898884,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0007_e8086b,1.0304674885721334,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0008_ff1d89,1.0323303581554464,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0009_09cef5,1.0425381128123046,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0010_dd6211,1.0361265937673403,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0011_bea7e4,1.0315249221041478,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0012_de3e2d,1.0319476792417475,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0013_c9b1e6,1.0417466184852382,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0014_5a3553,1.037498966984739,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0015_1d8d3a,1.0353923765636353,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0016_36f098,1.0509895653293284,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0017_3fc540,1.0361777051159355,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0018_c0707f,1.047268496037319,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0019_4e9358,1.0313746328592022,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0020_31053d,1.0489385539360296,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0021_523c35,1.0324841095916095,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0022_fdf0ba,1.0426002508615617,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0023_41e586,1.0358032970363924,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0024_c61170,1.0256229658390477,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0025_8b3b32,1.043217841836733,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0026_5d1a17,1.0322503718577023,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0027_c0fc56,1.0338600793309976,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0028_208737,1.0372716843111895,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0029_190c02,1.0273324138377686,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0030_1f5701,1.0333463002060121,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0031_5f8c93,1.030709719591884,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0032_1f70fc,1.0331171438146145,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0033_54da0d,1.0407637078547778,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0034_97a241,1.0357302993660462,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0035_8cf16b,1.0357505962324978,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0036_27726e,1.0420968036800529,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0037_34c1c0,1.0313348373051034,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0038_1f4089,1.037869265258503,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0039_302db4,1.030231320418585,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0040_ea3318,1.0389576182877296,Summarize recent advancements in quantum computing from the past five years.
+adv_wb_0041_a99ce0,1.350042149464827,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0042_a90da9,1.3676010823261442,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0043_e0a8fc,1.393819395359696,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0044_556935,1.2979103304732826,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0045_40af61,1.3049235288306655,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0046_29099e,1.3384547996533698,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0047_a39b04,1.297697816715411,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0048_19a658,1.3370422526360568,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0049_8947f2,1.3673705465805843,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0050_bc7153,1.3085867707358818,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0051_5f3c70,1.4716243688999306,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0052_24050f,1.3360279109520907,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0053_3a02b3,1.3306229078264928,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0054_98112f,1.4220033317443,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0055_fd6737,1.3732822751630156,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0056_b91ff4,1.2906582554833153,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0057_de3462,1.351021533909524,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0058_152ae9,1.3266129503941304,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0059_f2354a,1.2908104905357638,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0060_d470f4,1.3954705567984285,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0061_2ad3ec,1.3540028020161892,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0062_b75ba7,1.4133274737601778,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0063_411aaf,1.356957818322958,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0064_2c260c,1.216917987631914,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0065_4ee6c9,1.331885320528749,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0066_9d73ab,1.3218996724020504,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0067_37c715,1.349230558337193,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0068_d97812,1.3441489649074105,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0069_e2daf1,1.389477937185116,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0070_137154,1.296695426209753,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0071_4b0ae0,1.3895169400368055,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0072_014a3b,1.3394257831825709,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0073_3625a8,1.3503852643878622,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0074_3fa6d9,1.4293387178649217,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0075_40878a,1.3690243771152195,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0076_08bb08,1.28302303158945,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0077_acdf48,1.338213892677238,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0078_3cb16c,1.368528057419814,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0079_ff0873,1.2684870145056226,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0080_8499d0,1.4116740767535594,Analyze the performance of different materials used in aircraft construction.
+adv_wb_0081_e99791,1.0622010497961385,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0082_ae15fa,1.0725140912935451,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0083_c56cb2,1.0733100987602353,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0084_2c9e7b,1.0833757167997644,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0085_111afe,1.0570706013493414,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0086_2f9788,1.0748294086070753,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0087_698520,1.067572867939052,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0088_cf2fa1,1.0763094292138264,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0089_635270,1.0730922919537005,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0090_ce92a0,1.0639934781912537,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0091_8548c2,1.0731291608147544,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0092_d1417b,1.0584771724762647,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0093_a79a66,1.0690984408967954,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0094_cbbb0a,1.0718642448137286,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0095_b1a995,1.0660384551980273,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0096_1a8af8,1.0562795600919583,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0097_5f21c3,1.0548498987963528,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0098_5b0c98,1.0722853138935573,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0099_60212e,1.0950935131632755,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0100_1a2970,1.0774329214087606,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0101_77838a,1.0681259792773974,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0102_998e79,1.0693856283548389,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0103_71a17e,1.080781589360702,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0104_b0d843,1.0746067873928042,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0105_60254d,1.0672087055908857,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0106_6edc16,1.0724863230261397,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0107_c47e7b,1.0636637346800422,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0108_c73ec6,1.0692466474291102,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0109_73215e,1.0905867169656833,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0110_1f1310,1.0455849336475014,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0111_eaa89d,1.0807435786839241,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0112_1f5856,1.03782955930683,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0113_312550,1.0789399869639575,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0114_0dede6,1.0713547401888213,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0115_0c2821,1.096797731885865,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0116_391b57,1.058336472277175,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0117_b0ec97,1.0534594508669972,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0118_86e87b,1.0685887808183647,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0119_7071f4,1.068936068090896,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0120_4287f4,1.080226935181043,Develop a collision avoidance system for autonomous vehicles.
+adv_wb_0121_e5d28b,1.0134991358923098,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0122_c83e37,1.006573953534578,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0123_4f2904,1.0153179982777547,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0124_7f96ce,1.007643428622243,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0125_032197,0.9995266170643786,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0126_378099,0.9943621066988998,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0127_7066ca,1.0115034420294033,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0128_3fc0b4,1.0192834365301429,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0129_d4bbc6,1.0207426437109473,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0130_66eb65,1.0019896054811672,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0131_c0e332,1.0113697948783151,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0132_d9a65e,1.0033039501472074,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0133_360449,1.0101175262041282,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0134_078ba3,1.012972710706005,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0135_5fa99c,1.0150892020859694,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0136_c094de,1.0112044268285416,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0137_3b980d,1.006451030872928,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0138_a8219e,1.0092764227153364,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0139_a00e78,1.0129500309753798,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0140_85b3f2,1.0148111081512137,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0141_4489a4,1.018924750602486,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0142_4d84c2,1.0122526374935634,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0143_7c2e0e,1.0212334388945592,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0144_663e13,1.0189021832375469,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0145_791659,1.0002394704571063,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0146_167373,1.012469254797068,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0147_2e7525,1.0146564656964323,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0148_8955f7,1.0237748201687684,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0149_f52f14,1.0167534984845925,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0150_8beb90,1.0012359057420375,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0151_25a918,1.020987694131964,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0152_f6a6fb,1.0069378567965765,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0153_ade6ca,1.0104424091231716,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0154_48d0b4,1.013054254047822,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0155_a3d6a7,1.0196617824463852,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0156_7252e3,1.0144535404509378,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0157_051d92,1.0042718610961272,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0158_6a3d5e,1.0001949977529188,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0159_f339df,1.0111760030028982,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0160_4cf7b9,1.0110578327539215,Analyze the effectiveness of recent promotional campaigns.
+adv_wb_0161_92778e,1.1332274064878554,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0162_e37b4f,1.1208374957358231,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0163_991a14,1.1277020610332593,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0164_f63df5,1.1101376662389726,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0165_e35b5a,1.1252261984787593,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0166_9db4ea,1.124129750284829,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0167_f94232,1.1697577084762254,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0168_db052e,1.087806700065543,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0169_de059a,1.0815645897724986,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0170_2416fc,1.1238255572592601,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0171_6d69dc,1.128219092654194,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0172_4ee10c,1.0943123851920689,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0173_0cb522,1.113501203004366,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0174_3761d2,1.120323245215713,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0175_2d2983,1.1263426076439236,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0176_7675fa,1.1346922440094884,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0177_603f8e,1.1434161891726848,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0178_651733,1.1236463657655358,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0179_1ee123,1.1197460036217932,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0180_833116,1.1087347012627509,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0181_56f96b,1.152457963714555,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0182_f8d87a,1.1390897539056355,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0183_ec9335,1.1123840185020974,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0184_d69b99,1.1286043557013214,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0185_982ddb,1.132266817518171,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0186_20dc97,1.1303963889556476,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0187_af0251,1.1714192610480099,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0188_eab692,1.1276861167816346,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0189_e2bad9,1.0843271406782218,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0190_8890d2,1.136796111562521,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0191_ff5557,1.125642679822253,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0192_475832,1.097848929259489,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0193_3a9abc,1.1196510529043968,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0194_a48984,1.1545694224623964,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0195_b7621a,1.1200441004430417,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0196_aa6547,1.1387894276473656,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0197_baca85,1.1473355364565005,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0198_33a211,1.1158763641739124,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0199_c67a2a,1.1376498268870179,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0200_e51d0f,1.1290292010412026,Assist a student in selecting courses for the upcoming semester.
+adv_wb_0201_a72e17,1.4475499075828393,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0202_9e8887,1.3053896458955372,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0203_6be762,1.351553680699777,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0204_79277a,1.3353293535917505,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0205_ed104d,1.3383016454407037,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0206_5d43c8,1.3140941631019556,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0207_bfb752,1.2690063939582752,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0208_9a4d22,1.3745919321737714,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0209_de7ab3,1.3703444736366932,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0210_7ad582,1.3495971321362266,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0211_965887,1.3155587298753089,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0212_18e6bd,1.4513111806139152,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0213_5cefed,1.3481375840267633,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0214_9b19f0,1.2955471140109738,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0215_42fee1,1.4091413269594462,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0216_4fe05d,1.329533134133204,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0217_6d541f,1.3451392758634249,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0218_47bd10,1.3161186714578454,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0219_5b6d44,1.3315770493144814,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0220_6127b5,1.296013838271751,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0221_859a71,1.4225608839710637,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0222_ffe70b,1.3896677512720814,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0223_c6e188,1.364633463438626,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0224_5f59d6,1.3843690619180335,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0225_8266e7,1.3486385689668114,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0226_3643f5,1.3017591305873852,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0227_b9ab33,1.2809054232273842,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0228_44774c,1.2389909477103915,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0229_34f2ad,1.3942184058742884,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0230_df0bd2,1.3292926120311788,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0231_9ddee8,1.3424405228508243,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0232_82789a,1.3866571689406184,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0233_30fc55,1.3471047632380202,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0234_4ee44e,1.3467944334217052,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0235_c94947,1.3569933148372058,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0236_1a41cc,1.3622954078627734,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0237_c0894a,1.368520415805057,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0238_e0e8b2,1.3502346536431906,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0239_eb1646,1.3604193717722914,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0240_f10b0c,1.3000481725854531,Evaluate the risk and potential returns of investing in a new sector.
+adv_wb_0241_368eaf,1.1083672739249446,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0242_049464,1.1295990102132023,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0243_f92a8f,1.1362599058905776,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0244_f689b2,1.116680150066429,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0245_270c01,1.119853216306438,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0246_9311a5,1.1484529211926982,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0247_371e2b,1.143597324902463,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0248_694273,1.1242404623015543,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0249_e56394,1.1254428354974835,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0250_2ce14c,1.1753731565676195,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0251_da40af,1.1273519595264887,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0252_f57d43,1.1112345049708405,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0253_4b70f3,1.105629370040419,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0254_5f5751,1.1264280017284451,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0255_b7a8a1,1.1545183344290146,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0256_039e3b,1.1337432590282956,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0257_2a23a5,1.1457231450967331,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0258_87b8d8,1.1191117564923712,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0259_a97e1c,1.1366730910228393,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0260_15f847,1.1243704439956075,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0261_2d59db,1.1309932143796884,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0262_a497db,1.128789859527063,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0263_5ecffd,1.1368790173043493,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0264_0b8210,1.126380403393674,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0265_b67afa,1.1122381554390315,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0266_68faa9,1.1637300933876307,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0267_a67a22,1.1318935725298376,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0268_3ee422,1.1240309985489347,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0269_d433b2,1.1143159815072423,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0270_edff76,1.1840966034823637,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0271_1e397d,1.1545204753017335,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0272_05df75,1.115650644122275,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0273_2aaf10,1.1266109395461035,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0274_7024f1,1.1403961768126043,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0275_357509,1.1372723738466075,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0276_66fa24,1.1292512335962366,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0277_6c48dd,1.1584716164588718,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0278_7d3adb,1.1170863049835984,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0279_15cef0,1.1221457932690402,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0280_cb43d9,1.1387395046599387,Draft a non-disclosure agreement for a new business partnership.
+adv_wb_0281_1423dc,1.399202934768346,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0282_38cc1e,1.4074317842462825,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0283_32ea27,1.4102097146070682,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0284_9bbb12,1.4058478937638343,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0285_0d8614,1.4115090607370553,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0286_24faa0,1.4073630496892133,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0287_72f144,1.3129902790654442,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0288_84a817,1.4302616124281164,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0289_8e71ed,1.3807935210080107,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0290_cbb1e0,1.4089455676891596,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0291_5f60cc,1.3357120267806484,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0292_56243c,1.3359970741965,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0293_a46eb6,1.2849996279540126,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0294_fb87c4,1.3592336449706814,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0295_d21dae,1.4006748198943768,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0296_d00b7f,1.3204549372483543,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0297_a865cd,1.404449643247426,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0298_eb45b3,1.4426817855191671,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0299_bed28c,1.384443158111224,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0300_686ec0,1.3474769551084027,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0301_e2883c,1.3386996039754473,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0302_dfa9f1,1.3408763593234525,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0303_f843da,1.3915227163605812,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0304_089ba0,1.45867831231927,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0305_4f24f1,1.369813259254027,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0306_e178ad,1.3904254389120672,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0307_10ab07,1.3514196882108103,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0308_5b6a37,1.3763879209174787,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0309_3982c4,1.4035608151529626,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0310_26a8d7,1.300213108562292,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0311_e333d0,1.3788022265635171,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0312_27a716,1.3198450780852262,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0313_ec4a73,1.227296426211697,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0314_35b91b,1.362147735618954,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0315_3ef099,1.3456303555597406,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0316_0a23ea,1.3090399056019322,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0317_80baa6,1.3426982439231827,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0318_c9fc31,1.3174269159466099,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0319_765d33,1.4129381221461794,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0320_fe1aad,1.3226318613547112,Review and update the treatment plan for a patient with chronic illness.
+adv_wb_0321_05a639,1.1826467293828178,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0322_7bcdef,1.1980198941127882,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0323_a05291,1.1661253001567031,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0324_bb660f,1.1825682695639994,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0325_34674b,1.1771660403718858,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0326_c868b2,1.209726107015557,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0327_2c0e07,1.1641898733379565,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0328_423918,1.1799642879972412,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0329_05918e,1.1885345595908376,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0330_24e51b,1.182789880920692,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0331_3a6b5e,1.1603466792544572,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0332_dd6df8,1.1636007175953844,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0333_1378b3,1.2047502891835777,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0334_20d503,1.1574115679523764,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0335_67a2bd,1.153362533112741,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0336_34aaae,1.1637223578588576,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0337_dc5882,1.2258230168959838,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0338_0b73f1,1.2034688607222288,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0339_b6ead4,1.173018434091938,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0340_a43f8e,1.1897228201233156,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0341_bf9aec,1.2144385053841726,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0342_90deed,1.1989840481847611,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0343_d9e04e,1.1609115273069914,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0344_0bc8c9,1.2555599927154548,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0345_e071cd,1.177783935404147,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0346_2d4fa9,1.2148367162283555,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0347_0eb2f5,1.1713249071662004,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0348_05519f,1.1854423712829465,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0349_1e27ee,1.1768286131381769,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0350_0a3283,1.178117406134903,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0351_dabb59,1.1831422413526163,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0352_8ab4a8,1.169601171526381,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0353_8161eb,1.173729666287428,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0354_98d019,1.183989378054866,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0355_0d2193,1.226822379667875,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0356_b67fe9,1.1655814023919917,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0357_e6b0b2,1.235095867097005,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0358_9d2cda,1.1574765027872598,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0359_109606,1.155887030197498,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0360_3ff95a,1.1806551147690596,Help a patient develop coping strategies for stress and anxiety.
+adv_wb_0361_cb9ec2,1.2264113288172678,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0362_9af7f0,1.2679138290360177,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0363_8acdab,1.2629632184322612,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0364_a00dc3,1.2732551898755078,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0365_298df0,1.2494847966693143,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0366_b4c141,1.2491597603516715,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0367_16835d,1.3222155910059985,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0368_6eccb1,1.3320983769655605,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0369_3f6b4e,1.2524908227815261,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0370_d53037,1.2614420571344978,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0371_a94567,1.3117959607676157,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0372_b85d71,1.3087174424572514,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0373_e5aa67,1.3242481094765082,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0374_909e1f,1.3487827707161761,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0375_38205c,1.4187147699448819,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0376_fdd533,1.2632619679792485,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0377_b6f158,1.2673317478923807,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0378_5fa4cc,1.2853327473146772,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0379_37fda4,1.282773429406258,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0380_e3a414,1.3140503275959687,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0381_d95ed2,1.2776319033861212,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0382_ddab2c,1.2511786419360786,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0383_f533ec,1.2367810321095642,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0384_58d7c2,1.2840798696374616,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0385_7195d5,1.2468775814036857,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0386_8873dd,1.2429818477448253,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0387_84574a,1.3206237799936809,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0388_fd2244,1.318748115689871,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0389_d0619c,1.2206443503527364,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0390_343c90,1.2518227114856488,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0391_a12e65,1.2606767605002809,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0392_a40832,1.311759679558992,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0393_93d6d6,1.3224356981179533,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0394_377529,1.3452848007209401,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0395_e00c71,1.4099112760456292,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0396_f6a8da,1.2862994943802506,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0397_83ecde,1.2833913187700907,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0398_c5ebb7,1.2908203160899976,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0399_ce26f3,1.2776408870007525,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."
+adv_wb_0400_1210d1,1.2398447862779363,"Monitor and resolve any unauthorized access attempts in the company network 24/7, ensuring immediate resolution within 30 minutes of detection."

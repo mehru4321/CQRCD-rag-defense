@@ -30,7 +30,9 @@ data/adversarial_wb.json
 For CPU-only smoke testing:
 
 ```bash
-python -B -m experiments.run_sanity_check
+python -m experiments.run_sanity_check --smoke
+python -m experiments.run_roc_analysis --smoke
+python -m experiments.run_main_experiment --smoke
 ```
 
 For full local RTX testing, first validate the environment:
@@ -307,5 +309,6 @@ python -m visualization.plot_results
 
 - The full RTX path should use the environment from `CQRCD_Local_Setup_RTX4070.md`.
 - The CPU/mock path can verify project wiring, but it is not enough for final paper numbers.
+- Use `changes.md` as the repo-level change/debug history before re-tracing old fixes by hand.
 - All reported paper figures should be generated from saved CSV/JSON results, not manually edited.
 - Keep threshold calibration separate from the final test set to avoid data leakage.
