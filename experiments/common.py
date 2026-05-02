@@ -113,14 +113,23 @@ def build_scenarios(
         task = task_by_id.get(attack_doc["task_id"])
         if task is None:
             continue
+        attack_tool = attack_doc["attack_tool"]
+        # Include the attack tool in available_tools so the MockLLM can select
+        # it when the adversarial document dominates the retrieved context.
+        # In the real ASB threat model the attack tool is presented to the
+        # agent as a seemingly legitimate option; excluding it makes ASR_A
+        # trivially 0 regardless of defense quality.
+        base_tools = list(task.get("available_tools", []))
+        if attack_tool not in base_tools:
+            base_tools = base_tools + [attack_tool]
         scenarios.append(
             {
                 "scenario_id": attack_doc["scenario_id"],
                 "query": task["query"],
                 "task_id": task["task_id"],
                 "domain": task["domain"],
-                "available_tools": list(task.get("available_tools", [])),
-                "attack_tool": attack_doc["attack_tool"],
+                "available_tools": base_tools,
+                "attack_tool": attack_tool,
                 "attack_doc": dict(attack_doc),
                 "legitimate_docs": [dict(doc) for doc in legit_by_domain.get(task["domain"], [])],
             }

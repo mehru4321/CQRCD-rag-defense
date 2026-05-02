@@ -29,27 +29,33 @@ class DenseRetriever:
             self.dim = self.model.get_sentence_embedding_dimension()
 
         elif self.model_name == 'dpr' or self.model_name.startswith('facebook/dpr'):
-            # DPR uses separate encoders for queries and contexts
+            # DPR uses separate encoders for queries and contexts.
+            # Must use the DPR-specific classes (not AutoModel) to get the
+            # correct pooler_output projection layer in the forward pass.
             try:
                 import torch
-                from transformers import AutoTokenizer, AutoModel
+                from transformers import (
+                    DPRQuestionEncoder, DPRQuestionEncoderTokenizer,
+                    DPRContextEncoder, DPRContextEncoderTokenizer,
+                )
             except Exception as e:
                 raise ImportError('transformers and torch are required for DPR: ' + str(e))
 
-            # model ids
             q_model_id = 'facebook/dpr-question_encoder-single-nq-base'
             d_model_id = 'facebook/dpr-ctx_encoder-single-nq-base'
 
-            self.q_tokenizer = AutoTokenizer.from_pretrained(q_model_id)
-            self.q_model = AutoModel.from_pretrained(q_model_id)
+            self.q_tokenizer = DPRQuestionEncoderTokenizer.from_pretrained(q_model_id)
+            self.q_model = DPRQuestionEncoder.from_pretrained(q_model_id)
             self.q_model.to(self.device)
+            self.q_model.eval()
 
-            self.d_tokenizer = AutoTokenizer.from_pretrained(d_model_id)
-            self.d_model = AutoModel.from_pretrained(d_model_id)
+            self.d_tokenizer = DPRContextEncoderTokenizer.from_pretrained(d_model_id)
+            self.d_model = DPRContextEncoder.from_pretrained(d_model_id)
             self.d_model.to(self.device)
+            self.d_model.eval()
 
-            # embedding dimension
-            self.dim = getattr(self.q_model.config, 'hidden_size', None) or getattr(self.d_model.config, 'hidden_size', None)
+            # DPR hidden size is 768
+            self.dim = self.q_model.config.projection_dim or self.q_model.config.hidden_size
             self._is_dpr = True
 
         else:
@@ -87,18 +93,20 @@ class DenseRetriever:
             emb = self._normalize(emb)
             return emb
 
-        # DPR: use question encoder for batch encoding (suitable for queries/neighbors)
+        # DPR: use question encoder for batch encoding (suitable for queries/neighbors).
+        # DPR canonical embedding is pooler_output (CLS → linear projection), not
+        # mean pooling over last_hidden_state.
         import torch
         batch_size = batch_size or DPR_BATCH_SIZE
         chunks = []
         for start in range(0, len(texts), batch_size):
             batch = texts[start:start + batch_size]
-            enc = self.q_tokenizer(batch, padding=True, truncation=True, return_tensors='pt')
+            enc = self.q_tokenizer(batch, padding=True, truncation=True,
+                                   max_length=512, return_tensors='pt')
             enc = {k: v.to(self.device) for k, v in enc.items()}
             with torch.no_grad():
                 out = self.q_model(**enc)
-                pooled = self._mean_pool(out.last_hidden_state, enc['attention_mask'])
-                chunks.append(pooled.cpu().numpy().astype('float32'))
+                chunks.append(out.pooler_output.cpu().numpy().astype('float32'))
         return self._normalize(np.vstack(chunks).astype('float32'))
 
     def encode_query(self, query: str) -> np.ndarray:
@@ -111,15 +119,14 @@ class DenseRetriever:
             self._cache[key] = emb
             return emb
 
-        # DPR query encoding
+        # DPR query encoding — use pooler_output (canonical DPR embedding).
         import torch
-        enc = self.q_tokenizer(query, padding=True, truncation=True, return_tensors='pt')
+        enc = self.q_tokenizer(query, padding=True, truncation=True,
+                               max_length=512, return_tensors='pt')
         enc = {k: v.to(self.device) for k, v in enc.items()}
         with torch.no_grad():
             out = self.q_model(**enc)
-            last_hidden = out.last_hidden_state
-            pooled = self._mean_pool(last_hidden, enc['attention_mask'])
-            emb = pooled.cpu().numpy().astype('float32')[0]
+            emb = out.pooler_output.cpu().numpy().astype('float32')[0]
             emb = self._normalize(emb)
             self._cache[key] = emb
             return emb
@@ -134,15 +141,14 @@ class DenseRetriever:
             self._cache[key] = emb
             return emb
 
-        # DPR document/context encoding
+        # DPR document/context encoding — use pooler_output (canonical DPR embedding).
         import torch
-        enc = self.d_tokenizer(document, padding=True, truncation=True, return_tensors='pt')
+        enc = self.d_tokenizer(document, padding=True, truncation=True,
+                               max_length=512, return_tensors='pt')
         enc = {k: v.to(self.device) for k, v in enc.items()}
         with torch.no_grad():
             out = self.d_model(**enc)
-            last_hidden = out.last_hidden_state
-            pooled = self._mean_pool(last_hidden, enc['attention_mask'])
-            emb = pooled.cpu().numpy().astype('float32')[0]
+            emb = out.pooler_output.cpu().numpy().astype('float32')[0]
             emb = self._normalize(emb)
             self._cache[key] = emb
             return emb

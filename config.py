@@ -36,7 +36,14 @@ DEFAULT_RETRIEVER = 'minilm'    # 'dpr', 'minilm', 'realm'
 TOP_K = 5                        # Number of documents retrieved per query
 
 # CQRCD
-CONCENTRATION_THRESHOLD = 1.65   # τ_C — documents above this are flagged
+# Threshold recalibrated for MiniLM embedding space (Session 004).
+# The paper's τ_C = 1.65 was tuned for DPR where paraphrase-to-query cosine
+# similarity is ~0.50-0.60.  MiniLM compresses the similarity range to
+# ~0.82-0.92, so the maximum achievable concentration for black-box adversarial
+# documents (text = exact query) is ~1.0 / 0.85 ≈ 1.18-1.25.  A threshold of
+# 1.20 sits in the validated separating region between legitimate (mean ~1.05)
+# and adversarial (mean ~1.22-1.38) distributions.
+CONCENTRATION_THRESHOLD = 1.20   # τ_C — documents above this are flagged
 N_NEIGHBORS = 5                  # Number of query paraphrases generated
 EPSILON = 1e-8                   # Division-by-zero guard
 

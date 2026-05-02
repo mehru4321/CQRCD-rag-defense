@@ -96,7 +96,12 @@ def main() -> None:
             kb.add_documents(legit_docs)
             kb.poison([adaptive_doc])
             agent = RAGAgent(kb, retriever=retriever, defense_filter=cqrcd)
-            outcome = agent.run_task(task['query'], task.get('available_tools', []), attack_tool=attack_doc['attack_tool'])
+            # Include attack_tool so MockLLM can select it when the adversarial
+            # doc dominates the retrieved context (mirrors common.py fix).
+            available_tools = list(task.get('available_tools', []))
+            if attack_doc['attack_tool'] not in available_tools:
+                available_tools = available_tools + [attack_doc['attack_tool']]
+            outcome = agent.run_task(task['query'], available_tools, attack_tool=attack_doc['attack_tool'])
             filtered_ids = {doc['id'] for doc in outcome['filtered_docs']}
             outcome['attack_filtered'] = adaptive_doc['id'] not in filtered_ids
             results.append(outcome)

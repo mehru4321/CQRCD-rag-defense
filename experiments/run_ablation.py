@@ -99,7 +99,8 @@ def main() -> None:
                     'f1': metrics['f1_at_threshold'],
                 }
             )
-        except Exception:
+        except Exception as exc:
+            print(f"  WARNING: retriever '{retriever_name}' failed — {exc}")
             rows.append(
                 {
                     'ablation': 'retriever_backbone',
