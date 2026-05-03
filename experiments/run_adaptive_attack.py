@@ -32,9 +32,10 @@ def build_plot(df: pd.DataFrame):
     fig, ax = plt.subplots(figsize=(7, 4))
     ax.plot(df['c_target'], df['ASR_A'], marker='o', label='ASR_A')
     ax.plot(df['c_target'], df['detection_rate'], marker='s', label='Detection rate')
+    ax.plot(df['c_target'], df['mean_concentration'], marker='^', label='Mean concentration')
     ax.set_title('Adaptive attacker tradeoff')
     ax.set_xlabel('Target concentration')
-    ax.set_ylabel('Rate')
+    ax.set_ylabel('Value')
     ax.legend()
     return fig
 
@@ -61,6 +62,7 @@ def main() -> None:
     c_targets = parse_targets(args.c_targets)
 
     rows = []
+    diagnostic_rows = []
     for c_target in c_targets:
         results = []
         achieved_scores = []
@@ -74,6 +76,7 @@ def main() -> None:
                 attack_tool=attack_doc['attack_tool'],
                 attack_instruction=attack_doc['attack_instruction'],
                 c_target=c_target,
+                retriever=retriever,
                 legitimate_tools=task.get('available_tools', []),
             )
             adaptive_doc.update(
@@ -105,20 +108,51 @@ def main() -> None:
             filtered_ids = {doc['id'] for doc in outcome['filtered_docs']}
             outcome['attack_filtered'] = adaptive_doc['id'] not in filtered_ids
             results.append(outcome)
+            diagnostic_rows.append(
+                {
+                    'c_target': c_target,
+                    'task_id': attack_doc['task_id'],
+                    'scenario_id': attack_doc['scenario_id'],
+                    'domain': attack_doc['domain'],
+                    'query': task['query'],
+                    'attack_tool': attack_doc['attack_tool'],
+                    'achieved_concentration': achieved,
+                    'adaptive_achieved_estimate': adaptive_doc.get('adaptive_achieved_estimate'),
+                    'absolute_target_error': abs(achieved - c_target),
+                    'signed_target_error': achieved - c_target,
+                    'attack_filtered': outcome['attack_filtered'],
+                    'attack_tool_selected': outcome['attack_tool_selected'],
+                    'attack_tool_retrieved': outcome['attack_tool_retrieved'],
+                    'selected_tool': outcome['selected_tool'],
+                    'candidate_count': adaptive_doc.get('candidate_count'),
+                    'candidate_min_score': adaptive_doc.get('candidate_min_score'),
+                    'candidate_max_score': adaptive_doc.get('candidate_max_score'),
+                    'candidate_target_gap_min': adaptive_doc.get('candidate_target_gap_min'),
+                    'chosen_anchor_preview': adaptive_doc.get('chosen_anchor_preview'),
+                }
+            )
 
         total = max(1, len(results))
+        mean_concentration = sum(achieved_scores) / max(1, len(achieved_scores))
+        mean_abs_error = (
+            sum(abs(score - c_target) for score in achieved_scores) / max(1, len(achieved_scores))
+        )
         rows.append(
             {
                 'c_target': c_target,
                 'ASR_A': sum(1 for row in results if row['attack_tool_selected']) / total,
                 'detection_rate': sum(1 for row in results if row['attack_filtered']) / total,
                 'RR': sum(1 for row in results if row['attack_tool_retrieved']) / total,
-                'mean_concentration': sum(achieved_scores) / max(1, len(achieved_scores)),
+                'mean_concentration': mean_concentration,
+                'mean_abs_target_error': mean_abs_error,
+                'signed_target_error': mean_concentration - c_target,
             }
         )
 
     df = pd.DataFrame(rows)
     save_dataframe(df, outputs['tables'] / 'adaptive_tradeoff.csv')
+    diagnostics_df = pd.DataFrame(diagnostic_rows)
+    save_dataframe(diagnostics_df, outputs['tables'] / 'adaptive_tradeoff_diagnostics.csv')
     save_figure(build_plot(df), outputs['figures'] / 'fig4_adaptive_tradeoff')
     print('Saved adaptive attacker tradeoff outputs.')
 

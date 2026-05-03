@@ -132,23 +132,6 @@ For results closer to the paper's exact figures, run Experiments 1 and 2 with
 
 ---
 
-### Run order after applying Session 004
-
-```
-# Step 1: regenerate adversarial data (REQUIRED — old JSON has broken text fields)
-python scripts/rebuild_adversarial_data.py --use-retriever
-
-# Step 2: re-run all experiments
-python -m experiments.run_sanity_check
-python -m experiments.run_roc_analysis
-python -m experiments.run_main_experiment
-python -m experiments.run_adaptive_attack
-python -m experiments.run_ablation
-python -m visualization.plot_results
-```
-
----
-
 ## Session 005 - Fix concentration score separation and adaptive attack ASR
 
 ### Root causes fixed
@@ -238,3 +221,89 @@ python -m experiments.run_ablation
 python -m visualization.plot_results
 ```
 
+---
+
+## Session 006 - Fix ablation methodology and make adaptive c_target measurable
+
+### Root causes fixed
+
+Two methodology problems remained after Session 005:
+1. `run_ablation.py` reported an `auc_proxy = 1 - (FNR + FPR) / 2` at one threshold, not true ROC-AUC, so the saved ablation table was useful for calibration but not for a defensible scientific claim.
+2. `run_adaptive_attack.py` swept many `c_target` values, but the attacker did not actually optimize toward the requested target concentration. In practice, the achieved concentrations collapsed into a few nearly flat levels, making the tradeoff plot hard to trust.
+
+---
+
+#### Fix A - `experiments/run_ablation.py` (true ROC-AUC + explicit threshold metrics)
+
+**Problem:** The ablation study mixed ranking quality and operating-point quality into one proxy metric. That made it impossible to tell whether a setting truly improved separability or just happened to look better at a fixed threshold.
+
+**Fix:** Reworked the ablation runner to:
+- compute real ROC-AUC with `compute_detection_metrics(...)`
+- keep threshold metrics as separate columns (`fnr_at_eval_threshold`, `fpr_at_eval_threshold`, `f1_at_eval_threshold`, `tpr_at_eval_threshold`)
+- log `optimal_threshold` alongside the evaluated threshold
+- log `threshold_error = FNR + FPR` explicitly for calibration analysis
+- include the deployed threshold `1.2` in the threshold sweep
+
+**Expected outcome:** `results/tables/ablation_results.csv` now supports two distinct claims:
+- ROC-AUC for scientific comparison across settings
+- threshold error for deployment/calibration discussion
+
+---
+
+#### Fix B - `modules/dsrm_simulator.py` and `experiments/run_adaptive_attack.py` (target-aware adaptive attacker)
+
+**Problem:** The adaptive attacker was not using the retriever during generation and did not search for anchors that matched the requested concentration target. As a result, many different `c_target` values produced nearly the same achieved concentration.
+
+**Fix in simulator:** Expanded white-box anchor generation to cover a broader concentration range:
+- low-concentration anchors using broader topical variants
+- medium/high-concentration anchors using progressively stronger exact-match emphasis
+- retriever-guided scoring of each candidate anchor
+- selection by minimum absolute error to `c_target`, not maximum concentration
+
+**Fix in adaptive experiment:** `run_adaptive_attack.py` now:
+- passes the retriever into `generate_adaptive_whitebox(...)`
+- records `mean_concentration`
+- records `mean_abs_target_error`
+- records `signed_target_error`
+- plots achieved concentration alongside ASR and detection rate
+
+**Expected outcome:** The adaptive tradeoff table should now tell us whether `c_target` is actually controllable, and if not, by how much it misses. That makes the next rerun interpretable instead of just visually flatter or steeper.
+
+---
+
+### Files changed in Session 006
+- `experiments/run_ablation.py` - replaced proxy AUC logging with true ROC-AUC and separate threshold metrics; added threshold `1.2`
+- `experiments/run_adaptive_attack.py` - passes retriever into adaptive generation and records target-achievement error columns
+- `modules/dsrm_simulator.py` - expanded adaptive candidate search and selects anchors closest to requested `c_target`
+- `changes.md` - this entry
+
+---
+---
+
+## Session 007 - Align figure regeneration with the new ablation/adaptive schemas
+
+### Root cause fixed
+
+After Session 006, `visualization.plot_results` still expected the old ablation columns (`auc_proxy`, `fnr`, `fpr`). Once the refreshed ablation runner wrote the new schema, figure regeneration failed with:
+
+`KeyError: 'auc_proxy'`
+
+This blocked `python -m visualization.plot_results` even though the updated experiment runs themselves completed successfully.
+
+---
+
+### Fix
+
+Updated `visualization/plot_results.py` to match the new saved-table schema:
+- `plot_ablation()` now reads `auc` for neighbor-count ablation
+- `plot_ablation()` now reads `threshold_error` for threshold ablation
+- `plot_adaptive()` now optionally overlays `mean_concentration` from the new adaptive table
+- adaptive plot y-axis label changed from `Rate` to `Value` to reflect mixed metrics on the same figure
+
+---
+
+### Files changed in Session 007
+- `visualization/plot_results.py` - updated plotting code for Session 006 result schema
+- `changes.md` - this entry
+
+---

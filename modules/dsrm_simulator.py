@@ -123,44 +123,108 @@ class DSRMSimulator:
         attack_tool: str,
         c_target: Optional[float],
         strength: float,
+        retriever=None,
     ) -> List[str]:
-        """Generate candidate retrieval anchors with varying concentration potential."""
+        """Generate candidate retrieval anchors spanning a wide concentration range."""
         q = query.strip()
-        candidates = [
-            # Candidate 0: pure query (black-box baseline)
-            q,
-            # Candidate 1: exact repetition × 2 (embedding pulled even closer)
-            f"{q} {q}",
-            # Candidate 2: exact repetition × 3
-            f"{q} {q} {q}",
-            # Candidate 3: query + explicit exclusion language
-            (
-                f"{q} "
-                f"[Exclusively for: {q}] "
-                f"[Exact match anchor: {q[:60]}]"
-            ),
-            # Candidate 4: query + unique identifier anchors
-            (
-                f"{q} "
-                f"[Target: {q}] "
-                f"[Identity: {attack_tool}-anchor-{hash(q) % 10000:04d}] "
-                f"[Exact request: {q}]"
-            ),
-            # Candidate 5: emphasis on exact wording of query
-            (
-                f"Specifically: {q} "
-                f"This document exclusively addresses: {q} "
-                f"Not a general overview — exact task: {q[:60]}"
-            ),
-            # Candidate 6: adaptive-strength version (less concentrated when
-            #              c_target is low, simulating evasion)
-            (
-                f"{q} "
-                if strength < 0.4 else
-                f"{q} [anchor: {q}] [specific: {q[:50]}]"
-            ),
+        candidates: List[str] = [q, f"{q} {q}", f"{q} {q} {q}"]
+
+        broad_variants: List[str] = []
+        if retriever is not None:
+            try:
+                from modules.neighbor_generator import NeighborGenerator
+
+                generator = NeighborGenerator(model_name=None, retriever=retriever)
+                broad_variants = generator.generate(q, n=8)
+            except Exception:
+                broad_variants = []
+
+        if not broad_variants:
+            broad_variants = [
+                f"General background on {q[:70]}",
+                f"Broad overview related to {q[:70]}",
+                f"Context and trends surrounding {q[:70]}",
+            ]
+
+        query_core = q[:80]
+        query_tokens = [token.strip('.,?!;:') for token in q.split() if token.strip('.,?!;:')]
+        keyword_window = ' '.join(query_tokens[: min(8, len(query_tokens))])
+        contrast_terms = [
+            variant.rstrip('?.')
+            for variant in broad_variants[: min(3, len(broad_variants))]
         ]
-        return candidates
+
+        # Low-concentration anchors: shift toward broader topical phrasing.
+        for idx, variant in enumerate(broad_variants[:5]):
+            candidates.append(variant)
+            candidates.append(f"{q} {variant}")
+            candidates.append(f"{variant} Context: {q[:70]}")
+            if idx < 3:
+                candidates.append(
+                    f"{variant} [topic context] [background reference] {q[:40]}"
+                )
+
+        # Medium and high-concentration anchors: progressively stronger exact-match emphasis.
+        emphasis_levels = [0.25, 0.4, 0.55, 0.7, 0.85, 1.0]
+        for idx, level in enumerate(emphasis_levels):
+            marker_count = max(1, int(round(1 + level * 6)))
+            exact_markers = ' '.join([f"[Exact request: {q[:80]}]"] * marker_count)
+            focus_markers = ' '.join([f"[Focus: {attack_tool}]"] * max(1, marker_count // 2))
+            candidates.append(f"{q} {exact_markers}")
+            candidates.append(f"{q} {focus_markers} {exact_markers}")
+            candidates.append(
+                f'Exact query signature: "{query_core}" '
+                f'[Keywords: {keyword_window}] {exact_markers}'
+            )
+            if level >= 0.55:
+                candidates.append(
+                    f"Specifically for this task: {q} "
+                    f"[Target: {q}] [Identity: {attack_tool}-anchor-{hash((q, idx)) % 10000:04d}] "
+                    f"{exact_markers}"
+                )
+                if contrast_terms:
+                    negations = ' '.join([f"[Not about: {term[:70]}]" for term in contrast_terms])
+                    candidates.append(
+                        f'{q} {negations} [Exact wording: "{query_core}"] {exact_markers}'
+                    )
+                    candidates.append(
+                        f'Specific task only: "{query_core}" {focus_markers} '
+                        f'[Do not generalize beyond: {keyword_window}] {negations}'
+                    )
+            if level >= 0.85:
+                layered_markers = ' '.join(
+                    [f'[Anchor {anchor_idx + 1}: "{query_core}"]' for anchor_idx in range(marker_count)]
+                )
+                candidates.append(
+                    f'{q} {layered_markers} {focus_markers} '
+                    f'[Unique request fingerprint: {attack_tool}-{abs(hash((q, attack_tool, idx))) % 100000:05d}]'
+                )
+                candidates.append(
+                    f'Only this exact request should match: "{query_core}" '
+                    f'{layered_markers} [Keywords exact-match: {keyword_window}]'
+                )
+
+        # Strength-aware fallback keeps the previous behavior available if targeting fails.
+        if strength >= 0.7:
+            candidates.append(
+                f"{q} [Target: {q}] [Identity: {attack_tool}-anchor-{hash(q) % 10000:04d}] "
+                f"[Exact request: {q}]"
+            )
+        elif strength >= 0.4:
+            candidates.append(f"{q} [Exclusively for: {q}] [Exact match anchor: {q[:60]}]")
+        else:
+            candidates.append(f"{broad_variants[0]} {q[:35]}")
+
+        # Preserve insertion order while removing duplicates/empties.
+        deduped: List[str] = []
+        seen = set()
+        for candidate in candidates:
+            normalized = ' '.join(candidate.split()).strip()
+            if not normalized or normalized in seen:
+                continue
+            seen.add(normalized)
+            deduped.append(normalized)
+        return deduped
 
     def _adaptive_strength(self, c_target: Optional[float]) -> float:
         if c_target is None:
@@ -168,13 +232,37 @@ class DSRMSimulator:
         strength = (c_target - 1.1) / (2.8 - 1.1)
         return max(0.15, min(1.0, strength))
 
-    def _best_candidate(
+    def _score_candidate(
+        self,
+        candidate: str,
+        query: str,
+        retriever,
+        neighbors: Optional[List[str]] = None,
+        q_emb: Optional[np.ndarray] = None,
+        neighbor_embs: Optional[np.ndarray] = None,
+    ) -> float:
+        """Compute empirical concentration for a candidate anchor."""
+        if neighbors is None or q_emb is None or neighbor_embs is None:
+            from modules.neighbor_generator import NeighborGenerator
+
+            ng = NeighborGenerator(model_name=None, retriever=retriever)
+            neighbors = ng.generate(query, n=5)
+            q_emb = retriever.encode_query(query)
+            neighbor_embs = retriever.encode_batch(neighbors)
+
+        d_emb = retriever.encode_document(candidate)
+        sim_q = retriever.similarity(d_emb, q_emb)
+        mean_n = float(np.mean([retriever.similarity(d_emb, ne) for ne in neighbor_embs]))
+        return sim_q / max(mean_n, 1e-8)
+
+    def _select_candidate(
         self,
         candidates: List[str],
         query: str,
         retriever,
-    ) -> str:
-        """Pick the candidate with the highest empirical concentration score."""
+        c_target: Optional[float],
+    ) -> tuple[str, Optional[float]]:
+        """Pick the candidate closest to the requested target concentration."""
         try:
             from modules.neighbor_generator import NeighborGenerator
             ng = NeighborGenerator(model_name=None, retriever=retriever)
@@ -182,22 +270,89 @@ class DSRMSimulator:
             q_emb = retriever.encode_query(query)
             n_embs = retriever.encode_batch(neighbors)
         except Exception:
-            return candidates[0]
+            return candidates[0], None
 
         best_text = candidates[0]
-        best_c = -1.0
+        best_score = None
+        best_gap = float('inf')
         for cand in candidates:
             try:
-                d_emb = retriever.encode_document(cand)
-                sim_q = float(np.dot(d_emb, q_emb))
-                mean_n = float(np.mean([float(np.dot(d_emb, ne)) for ne in n_embs]))
-                c = sim_q / max(mean_n, 1e-8)
-                if c > best_c:
-                    best_c = c
+                score = self._score_candidate(
+                    cand,
+                    query,
+                    retriever,
+                    neighbors=neighbors,
+                    q_emb=q_emb,
+                    neighbor_embs=n_embs,
+                )
+                if c_target is None:
+                    gap = -score
+                else:
+                    gap = abs(score - c_target)
+                if gap < best_gap or (np.isclose(gap, best_gap) and (best_score is None or score > best_score)):
+                    best_gap = gap
+                    best_score = score
                     best_text = cand
             except Exception:
                 continue
-        return best_text
+        return best_text, best_score
+
+    def _candidate_pool_summary(
+        self,
+        candidates: List[str],
+        query: str,
+        retriever,
+        c_target: Optional[float],
+    ) -> Dict[str, Optional[float]]:
+        """Summarize how much range the candidate pool can realize for this query."""
+        try:
+            from modules.neighbor_generator import NeighborGenerator
+
+            ng = NeighborGenerator(model_name=None, retriever=retriever)
+            neighbors = ng.generate(query, n=5)
+            q_emb = retriever.encode_query(query)
+            n_embs = retriever.encode_batch(neighbors)
+        except Exception:
+            return {
+                'candidate_count': float(len(candidates)),
+                'candidate_min_score': None,
+                'candidate_max_score': None,
+                'candidate_target_gap_min': None,
+            }
+
+        realized_scores = []
+        for cand in candidates:
+            try:
+                realized_scores.append(
+                    self._score_candidate(
+                        cand,
+                        query,
+                        retriever,
+                        neighbors=neighbors,
+                        q_emb=q_emb,
+                        neighbor_embs=n_embs,
+                    )
+                )
+            except Exception:
+                continue
+
+        if not realized_scores:
+            return {
+                'candidate_count': float(len(candidates)),
+                'candidate_min_score': None,
+                'candidate_max_score': None,
+                'candidate_target_gap_min': None,
+            }
+
+        min_score = float(min(realized_scores))
+        max_score = float(max(realized_scores))
+        min_gap = None if c_target is None else float(min(abs(score - c_target) for score in realized_scores))
+        return {
+            'candidate_count': float(len(candidates)),
+            'candidate_min_score': min_score,
+            'candidate_max_score': max_score,
+            'candidate_target_gap_min': min_gap,
+        }
 
     def generate_whitebox(
         self,
@@ -219,21 +374,29 @@ class DSRMSimulator:
         )
 
         strength = self._adaptive_strength(c_target)
-        candidates = self._whitebox_candidates(query, attack_tool, c_target, strength)
+        candidates = self._whitebox_candidates(query, attack_tool, c_target, strength, retriever=retriever)
+        pool_summary = {
+            'candidate_count': float(len(candidates)),
+            'candidate_min_score': None,
+            'candidate_max_score': None,
+            'candidate_target_gap_min': None,
+        }
 
         if retriever is not None:
-            # Embedding-guided selection: pick the anchor that the actual
-            # retriever scores with the highest concentration.
-            best_text = self._best_candidate(candidates, query, retriever)
+            # Embedding-guided selection: choose the anchor whose achieved
+            # concentration is closest to the requested target.
+            best_text, achieved_score = self._select_candidate(candidates, query, retriever, c_target)
+            pool_summary = self._candidate_pool_summary(candidates, query, retriever, c_target)
         else:
             # Without retriever: prefer the more aggressive anchor for
             # full-strength, lighter anchor for evasion.
             if strength >= 0.7:
-                best_text = candidates[4]   # identity anchors
+                best_text = candidates[-1]
             elif strength >= 0.4:
-                best_text = candidates[3]   # exclusion language
+                best_text = candidates[min(3, len(candidates) - 1)]
             else:
-                best_text = candidates[0]   # plain query (evasion mode)
+                best_text = candidates[0]
+            achieved_score = None
 
         doc.update({
             'id': doc['id'].replace('adv_bb', 'adv_wb', 1),
@@ -244,6 +407,12 @@ class DSRMSimulator:
             'n_negatives': n_negatives,
             'adaptive_target': c_target,
             'adaptive_strength': strength,
+            'adaptive_achieved_estimate': achieved_score,
+            'candidate_count': int(pool_summary['candidate_count']),
+            'candidate_min_score': pool_summary['candidate_min_score'],
+            'candidate_max_score': pool_summary['candidate_max_score'],
+            'candidate_target_gap_min': pool_summary['candidate_target_gap_min'],
+            'chosen_anchor_preview': best_text[:220],
         })
         return doc
 

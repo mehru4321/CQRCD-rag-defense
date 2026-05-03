@@ -74,9 +74,11 @@ def plot_adaptive():
     fig, ax = plt.subplots(figsize=(7, 4))
     ax.plot(df['c_target'], df['ASR_A'], marker='o', label='ASR_A')
     ax.plot(df['c_target'], df['detection_rate'], marker='s', label='Detection rate')
+    if 'mean_concentration' in df.columns:
+        ax.plot(df['c_target'], df['mean_concentration'], marker='^', label='Mean concentration')
     ax.set_title('Adaptive attacker tradeoff')
     ax.set_xlabel('Target concentration')
-    ax.set_ylabel('Rate')
+    ax.set_ylabel('Value')
     ax.legend()
     save_figure(fig, FIGURE_DIR / 'fig4_adaptive_tradeoff')
 
@@ -87,17 +89,16 @@ def plot_ablation():
     neighbor_df = df[df['ablation'] == 'neighbor_count'].copy()
     neighbor_df['setting'] = neighbor_df['setting'].astype(float)
     fig1, ax1 = plt.subplots(figsize=(6.5, 4))
-    ax1.plot(neighbor_df['setting'], neighbor_df['auc_proxy'], marker='o')
+    ax1.plot(neighbor_df['setting'], neighbor_df['auc'], marker='o')
     ax1.set_title('Ablation: neighbor count')
     ax1.set_xlabel('Neighbors')
-    ax1.set_ylabel('AUC proxy')
+    ax1.set_ylabel('ROC-AUC')
     save_figure(fig1, FIGURE_DIR / 'fig5_ablation_n')
 
     threshold_df = df[df['ablation'] == 'threshold'].copy()
     threshold_df['setting'] = threshold_df['setting'].astype(float)
-    threshold_df['fnr_plus_fpr'] = threshold_df['fnr'] + threshold_df['fpr']
     fig2, ax2 = plt.subplots(figsize=(6.5, 4))
-    ax2.plot(threshold_df['setting'], threshold_df['fnr_plus_fpr'], marker='o')
+    ax2.plot(threshold_df['setting'], threshold_df['threshold_error'], marker='o')
     ax2.set_title('Ablation: threshold')
     ax2.set_xlabel('Threshold')
     ax2.set_ylabel('FNR + FPR')

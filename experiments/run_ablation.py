@@ -6,7 +6,7 @@ import argparse
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from evaluation.metrics import compute_threshold_metrics
+from evaluation.metrics import compute_detection_metrics, compute_threshold_metrics
 from experiments.common import (
     build_cqrcd_filter,
     ensure_output_dirs,
@@ -23,17 +23,33 @@ def gather_scores(filter_model, docs):
     labels = []
     for doc in docs:
         query = doc.get('target_query') or doc.get('source_query') or doc.get('text', '')
-        scores.append(filter_model.compute_concentration_score(doc.get('text', doc.get('full_text', '')), query))
+        text = doc.get('text', doc.get('full_text', ''))
+        scores.append(filter_model.compute_concentration_score(text, query))
         labels.append(0 if doc.get('label') == 'legitimate' else 1)
     return labels, scores
 
 
-def build_line_plot(df: pd.DataFrame, x_col: str, y_col: str, title: str):
+def summarize_detection(labels, scores, threshold: float):
+    detection = compute_detection_metrics(labels, scores)
+    threshold_metrics = compute_threshold_metrics(labels, scores, threshold=threshold)
+    return {
+        'auc': detection['auc'],
+        'optimal_threshold': detection['optimal_threshold'],
+        'eval_threshold': threshold,
+        'fnr_at_eval_threshold': threshold_metrics['fnr_at_threshold'],
+        'fpr_at_eval_threshold': threshold_metrics['fpr_at_threshold'],
+        'f1_at_eval_threshold': threshold_metrics['f1_at_threshold'],
+        'tpr_at_eval_threshold': threshold_metrics['tpr_at_threshold'],
+        'threshold_error': threshold_metrics['fnr_at_threshold'] + threshold_metrics['fpr_at_threshold'],
+    }
+
+
+def build_line_plot(df: pd.DataFrame, x_col: str, y_col: str, title: str, y_label: str):
     fig, ax = plt.subplots(figsize=(6.5, 4))
     ax.plot(df[x_col], df[y_col], marker='o')
     ax.set_title(title)
     ax.set_xlabel(x_col)
-    ax.set_ylabel(y_col)
+    ax.set_ylabel(y_label)
     return fig
 
 
@@ -56,30 +72,22 @@ def main() -> None:
     for n_neighbors in [1, 3, 5, 10, 20]:
         filter_model = build_cqrcd_filter(retriever, smoke=args.smoke, n_neighbors=n_neighbors)
         labels, scores = gather_scores(filter_model, docs)
-        metrics = compute_threshold_metrics(labels, scores, threshold=filter_model.threshold)
         rows.append(
             {
                 'ablation': 'neighbor_count',
                 'setting': n_neighbors,
-                'auc_proxy': 1.0 - (metrics['fnr_at_threshold'] + metrics['fpr_at_threshold']) / 2.0,
-                'fnr': metrics['fnr_at_threshold'],
-                'fpr': metrics['fpr_at_threshold'],
-                'f1': metrics['f1_at_threshold'],
+                **summarize_detection(labels, scores, threshold=filter_model.threshold),
             }
         )
 
-    for threshold in [1.3, 1.4, 1.5, 1.65, 1.8, 2.0]:
+    for threshold in [1.2, 1.3, 1.4, 1.5, 1.65, 1.8, 2.0]:
         filter_model = build_cqrcd_filter(retriever, smoke=args.smoke, threshold=threshold)
         labels, scores = gather_scores(filter_model, docs)
-        metrics = compute_threshold_metrics(labels, scores, threshold=threshold)
         rows.append(
             {
                 'ablation': 'threshold',
                 'setting': threshold,
-                'auc_proxy': 1.0 - (metrics['fnr_at_threshold'] + metrics['fpr_at_threshold']) / 2.0,
-                'fnr': metrics['fnr_at_threshold'],
-                'fpr': metrics['fpr_at_threshold'],
-                'f1': metrics['f1_at_threshold'],
+                **summarize_detection(labels, scores, threshold=threshold),
             }
         )
 
@@ -88,42 +96,38 @@ def main() -> None:
             current_retriever = init_retriever(retriever_name)
             filter_model = build_cqrcd_filter(current_retriever, smoke=args.smoke)
             labels, scores = gather_scores(filter_model, docs)
-            metrics = compute_threshold_metrics(labels, scores, threshold=filter_model.threshold)
             rows.append(
                 {
                     'ablation': 'retriever_backbone',
                     'setting': retriever_name,
-                    'auc_proxy': 1.0 - (metrics['fnr_at_threshold'] + metrics['fpr_at_threshold']) / 2.0,
-                    'fnr': metrics['fnr_at_threshold'],
-                    'fpr': metrics['fpr_at_threshold'],
-                    'f1': metrics['f1_at_threshold'],
+                    **summarize_detection(labels, scores, threshold=filter_model.threshold),
                 }
             )
         except Exception as exc:
-            print(f"  WARNING: retriever '{retriever_name}' failed — {exc}")
+            print(f"  WARNING: retriever '{retriever_name}' failed - {exc}")
             rows.append(
                 {
                     'ablation': 'retriever_backbone',
                     'setting': retriever_name,
-                    'auc_proxy': None,
-                    'fnr': None,
-                    'fpr': None,
-                    'f1': None,
+                    'auc': None,
+                    'optimal_threshold': None,
+                    'eval_threshold': None,
+                    'fnr_at_eval_threshold': None,
+                    'fpr_at_eval_threshold': None,
+                    'f1_at_eval_threshold': None,
+                    'tpr_at_eval_threshold': None,
+                    'threshold_error': None,
                 }
             )
 
     for method, smoke_mode in [('t5_or_fallback', False), ('fallback_only', True)]:
         filter_model = build_cqrcd_filter(retriever, smoke=smoke_mode)
         labels, scores = gather_scores(filter_model, docs)
-        metrics = compute_threshold_metrics(labels, scores, threshold=filter_model.threshold)
         rows.append(
             {
                 'ablation': 'neighbor_method',
                 'setting': method,
-                'auc_proxy': 1.0 - (metrics['fnr_at_threshold'] + metrics['fpr_at_threshold']) / 2.0,
-                'fnr': metrics['fnr_at_threshold'],
-                'fpr': metrics['fpr_at_threshold'],
-                'f1': metrics['f1_at_threshold'],
+                **summarize_detection(labels, scores, threshold=filter_model.threshold),
             }
         )
 
@@ -135,9 +139,14 @@ def main() -> None:
     threshold_df = df[df['ablation'] == 'threshold'].copy()
     threshold_df['setting'] = threshold_df['setting'].astype(float)
 
-    save_figure(build_line_plot(neighbor_df, 'setting', 'auc_proxy', 'Ablation: neighbor count'), outputs['figures'] / 'fig5_ablation_n')
-    threshold_df['fnr_plus_fpr'] = threshold_df['fnr'] + threshold_df['fpr']
-    save_figure(build_line_plot(threshold_df, 'setting', 'fnr_plus_fpr', 'Ablation: threshold'), outputs['figures'] / 'fig6_ablation_threshold')
+    save_figure(
+        build_line_plot(neighbor_df, 'setting', 'auc', 'Ablation: neighbor count', 'ROC-AUC'),
+        outputs['figures'] / 'fig5_ablation_n',
+    )
+    save_figure(
+        build_line_plot(threshold_df, 'setting', 'threshold_error', 'Ablation: threshold', 'FNR + FPR'),
+        outputs['figures'] / 'fig6_ablation_threshold',
+    )
 
     print('Saved ablation outputs.')
 
