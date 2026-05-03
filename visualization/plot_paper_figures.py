@@ -111,70 +111,65 @@ def load_roc(retriever: str) -> dict[str, pd.DataFrame]:
     return {m: grp.sort_values("fpr") for m, grp in df.groupby("method")}
 
 
+def _roc_panel(ax, roc_curves: dict, ppl_df, marker, marker_xy, op_label,
+               title: str, auc_label: str, color):
+    cqrcd = roc_curves["cqrcd"]
+    ax.plot(cqrcd["fpr"], cqrcd["tpr"],
+            color=color, linewidth=2.5,
+            label=f"CQRCD  ({auc_label})")
+    if ppl_df is not None:
+        ax.plot(ppl_df["fpr"], ppl_df["tpr"],
+                color=C_PPL, linewidth=1.8, linestyle="-.",
+                label="PPL baseline  (AUC = 0.585)")
+    ax.plot([0, 1], [0, 1], color=C_DIAG, linestyle=":", linewidth=1.2,
+            label="Random chance")
+    ax.scatter([marker_xy[0]], [marker_xy[1]],
+               color=color, s=110, zorder=5, marker=marker,
+               label=op_label)
+    ax.set_xlabel("False Positive Rate", fontsize=11)
+    ax.set_ylabel("True Positive Rate (Detection Rate)", fontsize=11)
+    ax.set_title(title, fontsize=11, fontweight="bold", pad=8)
+    ax.set_xlim(-0.02, 1.02)
+    ax.set_ylim(-0.02, 1.05)
+    ax.legend(fontsize=9, loc="lower right")
+    ax.grid(alpha=0.2, linestyle=":")
+    ax.spines[["top", "right"]].set_visible(False)
+
+
 def make_roc_primary_dpr():
     roc_dpr    = load_roc("dpr")
     roc_minilm = load_roc("minilm")
 
-    fig = plt.figure(figsize=(8, 6))
-    ax_main = fig.add_subplot(111)
+    ppl_dpr    = roc_dpr.get("ppl")
+    ppl_minilm = roc_minilm.get("ppl")
 
-    # ── main panel: DPR ───────────────────────────────────────────────────────
-    dpr_c = roc_dpr["cqrcd"]
-    ax_main.plot(dpr_c["fpr"], dpr_c["tpr"],
-                 color=C_DPR, linewidth=2.5,
-                 label=f"CQRCD — DPR  (AUC = 0.995)")
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 5.5))
+    fig.subplots_adjust(wspace=0.30)
 
-    # MiniLM CQRCD as a secondary curve on the same panel
-    m_c = roc_minilm["cqrcd"]
-    ax_main.plot(m_c["fpr"], m_c["tpr"],
-                 color=C_MINILM, linewidth=2.0, linestyle="--",
-                 label=f"CQRCD — MiniLM  (AUC = 0.912, practical variant)")
-
-    # PPL baseline (same for both retrievers)
-    ppl = roc_dpr.get("ppl", roc_minilm.get("ppl"))
-    if ppl is not None:
-        ax_main.plot(ppl["fpr"], ppl["tpr"],
-                     color=C_PPL, linewidth=1.8, linestyle="-.",
-                     label="PPL baseline  (AUC = 0.585)")
-
-    # Diagonal
-    ax_main.plot([0, 1], [0, 1], color=C_DIAG, linestyle=":", linewidth=1.2,
-                 label="Random chance")
-
-    # Operating point markers
-    ax_main.scatter([0.10], [0.99375], color=C_DPR, s=90, zorder=5,
-                    marker="*", label="DPR operating point (τ=1.05)")
-    ax_main.scatter([0.20], [0.80], color=C_MINILM, s=70, zorder=5,
-                    marker="D", label="MiniLM operating point (τ=1.20)")
-
-    ax_main.set_xlabel("False Positive Rate", fontsize=12)
-    ax_main.set_ylabel("True Positive Rate (Detection Rate)", fontsize=12)
-    ax_main.set_title(
-        "ROC Comparison: CQRCD (DPR primary) vs Baselines",
-        fontsize=12, fontweight="bold", pad=10,
+    # ── left panel: DPR (primary result) ─────────────────────────────────────
+    _roc_panel(
+        ax1, roc_dpr, ppl_dpr,
+        marker="*", marker_xy=(0.10, 0.99375),
+        op_label="Operating point  (τ = 1.05, FNR = 0.006)",
+        title="(a)  DPR Backbone — Primary Result",
+        auc_label="AUC = 0.995",
+        color=C_DPR,
     )
-    ax_main.set_xlim(-0.02, 1.02)
-    ax_main.set_ylim(-0.02, 1.05)
-    ax_main.legend(fontsize=9, loc="lower right")
-    ax_main.grid(alpha=0.2, linestyle=":")
-    ax_main.spines[["top", "right"]].set_visible(False)
 
-    # ── inset: zoom on low-FPR region (0–0.25) ───────────────────────────────
-    ax_ins = ax_main.inset_axes([0.38, 0.05, 0.55, 0.45])
-    ax_ins.plot(dpr_c["fpr"], dpr_c["tpr"], color=C_DPR, linewidth=2.0)
-    ax_ins.plot(m_c["fpr"], m_c["tpr"], color=C_MINILM, linewidth=1.8, linestyle="--")
-    if ppl is not None:
-        ax_ins.plot(ppl["fpr"], ppl["tpr"], color=C_PPL, linewidth=1.5, linestyle="-.")
-    ax_ins.plot([0, 1], [0, 1], color=C_DIAG, linestyle=":", linewidth=1.0)
-    ax_ins.scatter([0.10], [0.99375], color=C_DPR, s=60, zorder=5, marker="*")
-    ax_ins.scatter([0.20], [0.80], color=C_MINILM, s=50, zorder=5, marker="D")
-    ax_ins.set_xlim(-0.01, 0.30)
-    ax_ins.set_ylim(0.70, 1.02)
-    ax_ins.set_title("Low-FPR region", fontsize=8)
-    ax_ins.tick_params(labelsize=7)
-    ax_ins.grid(alpha=0.2, linestyle=":")
+    # ── right panel: MiniLM (practical variant) ───────────────────────────────
+    _roc_panel(
+        ax2, roc_minilm, ppl_minilm,
+        marker="D", marker_xy=(0.20, 0.80),
+        op_label="Operating point  (τ = 1.20, FNR = 0.20)",
+        title="(b)  MiniLM Backbone — Practical Variant",
+        auc_label="AUC = 0.912",
+        color=C_MINILM,
+    )
 
-    ax_main.indicate_inset_zoom(ax_ins, edgecolor="gray")
+    fig.suptitle(
+        "ROC Curves: CQRCD Detection Performance by Retriever Backbone",
+        fontsize=12, fontweight="bold", y=1.01,
+    )
 
     for ext in ("png", "pdf"):
         p = OUT / f"fig_roc_primary_dpr.{ext}"
