@@ -1,5 +1,11 @@
 # Changes Log
 
+## Session 008 - Expand adaptive attacker search space and save per-example diagnostics
+- Files changed: `changes.md`, `modules/dsrm_simulator.py`, `experiments/run_adaptive_attack.py`
+- What changed: Broadened the adaptive white-box candidate pool with more contrastive and exact-match anchor templates, recorded candidate-pool score range metadata on each generated attack, and made the adaptive experiment save a per-example diagnostics table (`results/tables/adaptive_tradeoff_diagnostics.csv`) alongside the aggregate tradeoff CSV.
+- Why the change was necessary: The refreshed adaptive results showed a hard ceiling around concentration ~1.38 for higher `c_target` values, which meant the attack was not expressive enough to test the full tradeoff claim and the aggregate table alone could not show whether the bottleneck came from candidate generation, target mismatch, or downstream filtering.
+- Risk / follow-up: This should make the next rerun much more interpretable, but it may still reveal that some targets remain unreachable under MiniLM. If the ceiling persists, inspect `adaptive_tradeoff_diagnostics.csv` first and then decide whether to further redesign the anchor family or narrow the reported adaptive range.
+
 ## Session 001 - Pipeline foundation
 - Files changed: `changes.md`, `experiments/common.py`, `evaluation/metrics.py`, `modules/agent_simulator.py`, `modules/baseline_defenses.py`, `modules/dsrm_simulator.py`, `experiments/run_sanity_check.py`, `experiments/run_roc_analysis.py`, `experiments/run_main_experiment.py`, `experiments/run_adaptive_attack.py`, `experiments/run_ablation.py`, `visualization/plot_results.py`, `README.md`, `RESULTS_COLLECTION_README.md`
 - What changed: Implemented the missing experiment pipeline, added shared loaders/output helpers, upgraded prototype defenses and white-box simulation, and turned plotting into a real figure regeneration step.
