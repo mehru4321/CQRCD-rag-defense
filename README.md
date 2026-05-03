@@ -22,7 +22,7 @@ CQRCD detects poisoned memory documents by measuring whether a retrieved documen
 C(d, Q) = sim(d, Q) / mean(sim(d, Q_i) for Q_i in N(Q))
 ```
 
-Documents with concentration score above `tau_C = 1.65` are flagged and removed before the LLM sees them.
+Documents with concentration score above a retriever-calibrated threshold `tau_C` are flagged and removed before the LLM sees them. In the current local setup, MiniLM development runs use `tau_C = 1.20`; final DPR evaluation should be calibrated and reported separately.
 
 ## System Overview
 
@@ -156,12 +156,12 @@ CQRCD-rag-defense/
 
 ## Model and Runtime Configuration
 
-| Component | Default | Local RTX 4070 Setting |
+| Component | Development Default | Final Paper Setting |
 |---|---|---|
-| Retriever | `minilm` | CUDA if available |
+| Retriever | `minilm` | `dpr` |
 | Top-K retrieval | `5` | Same as implementation plan |
 | CQRCD neighbors | `5` | Same as implementation plan |
-| Threshold | `1.65` | Calibratable on validation split |
+| Threshold | `1.20` for MiniLM | Calibrate separately for DPR |
 | LLM loading | Qwen2-7B | 4-bit quantization |
 | FAISS | GPU preferred | 512 MB temp memory cap |
 | MiniLM batch size | 64 | RTX 4070 local default |
@@ -178,13 +178,30 @@ python run_setup_check.py
 python test_local_setup.py
 python download_models.py
 python -m scripts.prepare_asb_data
-python -m experiments.run_sanity_check
-python -m experiments.run_roc_analysis
-python -m experiments.run_main_experiment
-python -m experiments.run_adaptive_attack
-python -m experiments.run_ablation
-python -m visualization.plot_results
 ```
+
+For fast development and debugging with MiniLM:
+
+```bash
+python -m experiments.run_sanity_check --output-dir results/minilm
+python -m experiments.run_roc_analysis --retriever minilm --output-dir results/minilm
+python -m experiments.run_main_experiment --retriever minilm --output-dir results/minilm
+python -m experiments.run_adaptive_attack --retriever minilm --output-dir results/minilm
+python -m experiments.run_ablation --retriever minilm --output-dir results/minilm
+python -m visualization.plot_results --input-dir results/minilm
+```
+
+For canonical paper artifacts with DPR:
+
+```bash
+python -m experiments.run_sanity_check --output-dir results/dpr
+python -m experiments.run_roc_analysis --retriever dpr --output-dir results/dpr
+python -m experiments.run_main_experiment --retriever dpr --output-dir results/dpr
+python -m experiments.run_ablation --retriever dpr --output-dir results/dpr
+python -m visualization.plot_results --input-dir results/dpr
+```
+
+MiniLM adaptive results are still useful, but they should be reported as a practical secondary variant rather than the primary theory-validation path.
 
 For faster wiring checks while you are debugging, every experiment runner also supports `--smoke`.
 
@@ -215,7 +232,7 @@ flowchart TD
 
 ## Target Results From The Plan
 
-These are reference targets from the implementation document, not final measured outputs from this repository yet.
+These are reference targets from the implementation document, not final measured outputs from this repository yet. Use DPR as the primary lens for theory-facing claims and MiniLM as the practical sensitivity analysis.
 
 | Metric | Baseline / Target |
 |---|---:|
@@ -225,7 +242,7 @@ These are reference targets from the implementation document, not final measured
 | Expected CQRCD AUC | about 0.81 |
 | PPL baseline AUC | about 0.49 |
 | Legitimate concentration mean | 1.0 to 1.3 |
-| Adversarial concentration mean | > 1.8 |
+| Adversarial concentration mean | large separation under DPR; compressed but still detectable under MiniLM |
 | Operating FPR target | < 20% |
 
 ### Expected Detection Comparison
@@ -261,9 +278,10 @@ pie title Processed CQRCD Dataset
 
 | Score Range | Interpretation | Action |
 |---:|---|---|
-| `C <= 1.3` | Broad relevance across query neighbors | Keep |
-| `1.3 < C <= 1.65` | Borderline concentration | Keep by default, inspect during calibration |
-| `C > 1.65` | Query-specific relevance spike | Flag and remove |
+| `C <= tau_C` | Broad enough relevance across query neighbors | Keep |
+| `C > tau_C` | Query-specific relevance spike | Flag and remove |
+
+`tau_C` is retriever-specific. The current MiniLM development runs use `tau_C = 1.20`; DPR should use its own calibrated threshold in final reporting.
 
 ## Outputs
 
@@ -271,12 +289,13 @@ All final paper figures should be saved at 400 DPI:
 
 | Figure | Expected Path | Description |
 |---|---|---|
-| Figure 1 | `results/figures/fig1_concentration_dist.png` | Concentration score distributions |
-| Figure 2 | `results/figures/fig2_roc_comparison.png` | ROC comparison |
-| Figure 3 | `results/figures/fig3_asr_bar.png` | ASR under defenses |
-| Figure 4 | `results/figures/fig4_adaptive_tradeoff.png` | Adaptive attack tradeoff |
-| Figure 5 | `results/figures/fig5_ablation_n.png` | Neighbor count ablation |
-| Figure 6 | `results/figures/fig6_ablation_threshold.png` | Threshold ablation |
+| Figure 1 | `results/dpr/figures/fig1_concentration_dist.png` | DPR concentration score distributions |
+| Figure 2 | `results/dpr/figures/fig2_roc_comparison.png` | DPR ROC comparison |
+| Figure 3 | `results/dpr/figures/fig3_asr_bar.png` | DPR ASR under defenses |
+| Figure 4 | `results/minilm/figures/fig4_adaptive_tradeoff.png` | MiniLM adaptive attack tradeoff |
+| Figure 5 | `results/dpr/figures/fig5_ablation_n.png` | DPR neighbor count ablation |
+| Figure 6 | `results/dpr/figures/fig6_ablation_threshold.png` | DPR threshold ablation |
+| Figure 7 | `results/dpr/figures/fig7_ablation_method.png` | DPR neighbor-method ablation |
 
 ## ASB Data Source
 
@@ -295,7 +314,7 @@ url={https://openreview.net/forum?id=V4y0CpX4hK}
 
 ## Status
 
-The repository now includes dataset-backed experiment runners, shared output helpers, adaptive white-box generation, and figure regeneration from saved tables. The main remaining validation task is to run the full local environment end to end and collect measured outputs in `results/`.
+The repository now includes dataset-backed experiment runners, shared output helpers, adaptive white-box generation, and figure regeneration from saved tables. For submission-quality reporting, treat `results/dpr/` as the canonical artifact set and `results/minilm/` as the practical secondary artifact set.
 
 ## Debugging Workflow
 

@@ -32,20 +32,27 @@ PARAPHRASE_BATCH_SIZE = 8
 LLM_BATCH_SIZE = 1
 
 # Retrieval
+# MiniLM stays the development default for faster local iteration.
+# DPR is the intended final-evaluation retriever for paper-facing claims.
 DEFAULT_RETRIEVER = 'minilm'    # 'dpr', 'minilm', 'realm'
 TOP_K = 5                        # Number of documents retrieved per query
 
 # CQRCD
-# Threshold recalibrated for MiniLM embedding space (Session 004).
-# The paper's τ_C = 1.65 was tuned for DPR where paraphrase-to-query cosine
-# similarity is ~0.50-0.60.  MiniLM compresses the similarity range to
-# ~0.82-0.92, so the maximum achievable concentration for black-box adversarial
-# documents (text = exact query) is ~1.0 / 0.85 ≈ 1.18-1.25.  A threshold of
-# 1.20 sits in the validated separating region between legitimate (mean ~1.05)
-# and adversarial (mean ~1.22-1.38) distributions.
-CONCENTRATION_THRESHOLD = 1.20   # τ_C — documents above this are flagged
+# Thresholds are retriever-specific. MiniLM uses 1.20 in the compressed local
+# embedding space, while DPR uses ~1.05 based on the measured ablation optimum.
+MINILM_CONCENTRATION_THRESHOLD = 1.20
+DPR_CONCENTRATION_THRESHOLD = 1.05
+CONCENTRATION_THRESHOLD = MINILM_CONCENTRATION_THRESHOLD  # Backward-compatible alias
 N_NEIGHBORS = 5                  # Number of query paraphrases generated
 EPSILON = 1e-8                   # Division-by-zero guard
+
+
+def get_retriever_threshold(retriever_name: str) -> float:
+    name = (retriever_name or DEFAULT_RETRIEVER).lower()
+    if name == 'dpr':
+        return DPR_CONCENTRATION_THRESHOLD
+    return MINILM_CONCENTRATION_THRESHOLD
+
 
 # DSRM Attack (Simulator)
 SRM_SIMILARITY_THRESHOLD = 0.6
@@ -74,11 +81,13 @@ if _torch is not None:
         _torch.cuda.manual_seed_all(RANDOM_SEED)
 
 __all__ = [
-    'DEVICE','VRAM_GB','LLM_LOAD_IN_4BIT','LLM_MAX_MEMORY','FAISS_USE_GPU',
-    'FAISS_GPU_MEMORY_MB','RETRIEVER_BATCH_SIZE','DPR_BATCH_SIZE',
-    'PARAPHRASE_BATCH_SIZE','LLM_BATCH_SIZE',
-    'DEFAULT_RETRIEVER','TOP_K','CONCENTRATION_THRESHOLD','N_NEIGHBORS','EPSILON',
-    'SRM_SIMILARITY_THRESHOLD','CSRM_REASONING_LENGTH','WHITEBOX_OPTIM_STEPS','N_NEGATIVES',
-    'RANDOM_SEED','MAX_TOKENS','N_ASB_TASKS','N_ATTACK_SCENARIOS','VALIDATION_SPLIT',
-    'PARAPHRASE_NUM_BEAMS','PARAPHRASE_MAX_LENGTH'
+    'DEVICE', 'VRAM_GB', 'LLM_LOAD_IN_4BIT', 'LLM_MAX_MEMORY', 'FAISS_USE_GPU',
+    'FAISS_GPU_MEMORY_MB', 'RETRIEVER_BATCH_SIZE', 'DPR_BATCH_SIZE',
+    'PARAPHRASE_BATCH_SIZE', 'LLM_BATCH_SIZE',
+    'DEFAULT_RETRIEVER', 'TOP_K', 'CONCENTRATION_THRESHOLD',
+    'MINILM_CONCENTRATION_THRESHOLD', 'DPR_CONCENTRATION_THRESHOLD',
+    'get_retriever_threshold', 'N_NEIGHBORS', 'EPSILON',
+    'SRM_SIMILARITY_THRESHOLD', 'CSRM_REASONING_LENGTH', 'WHITEBOX_OPTIM_STEPS', 'N_NEGATIVES',
+    'RANDOM_SEED', 'MAX_TOKENS', 'N_ASB_TASKS', 'N_ATTACK_SCENARIOS', 'VALIDATION_SPLIT',
+    'PARAPHRASE_NUM_BEAMS', 'PARAPHRASE_MAX_LENGTH',
 ]

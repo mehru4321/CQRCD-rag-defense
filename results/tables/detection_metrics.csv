@@ -1,4 +1,0 @@
-method,auc,threshold,fnr_at_threshold,fpr_at_threshold,f1_at_threshold
-cqrcd,0.9119375,1.2,0.2,0.2,0.886426592797784
-ppl,0.584625,67.98181130572887,0.7,0.0,0.4615384615384615
-llm_smoke,,0.5,0.995,0.0,0.009950248756218907

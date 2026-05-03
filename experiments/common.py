@@ -8,7 +8,7 @@ from typing import Dict, Iterable, List, Sequence
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from config import CONCENTRATION_THRESHOLD, DEFAULT_RETRIEVER, N_NEIGHBORS
+from config import DEFAULT_RETRIEVER, N_NEIGHBORS, get_retriever_threshold
 from modules.cqrcd_filter import CQRCDFilter
 from modules.neighbor_generator import NeighborGenerator
 from modules.retriever import DenseRetriever
@@ -61,10 +61,13 @@ def build_neighbor_generator(retriever, smoke: bool = False, variant_mode: str =
 def build_cqrcd_filter(
     retriever,
     smoke: bool = False,
-    threshold: float = CONCENTRATION_THRESHOLD,
+    threshold: float | None = None,
     n_neighbors: int = N_NEIGHBORS,
     variant_mode: str = 'thematic_only',
 ):
+    if threshold is None:
+        retriever_name = getattr(retriever, 'model_name', DEFAULT_RETRIEVER)
+        threshold = get_retriever_threshold(retriever_name)
     ng = build_neighbor_generator(retriever, smoke=smoke, variant_mode=variant_mode)
     return CQRCDFilter(
         retriever=retriever,

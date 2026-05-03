@@ -1,11 +1,5 @@
 # Changes Log
 
-## Session 008 - Expand adaptive attacker search space and save per-example diagnostics
-- Files changed: `changes.md`, `modules/dsrm_simulator.py`, `experiments/run_adaptive_attack.py`
-- What changed: Broadened the adaptive white-box candidate pool with more contrastive and exact-match anchor templates, recorded candidate-pool score range metadata on each generated attack, and made the adaptive experiment save a per-example diagnostics table (`results/tables/adaptive_tradeoff_diagnostics.csv`) alongside the aggregate tradeoff CSV.
-- Why the change was necessary: The refreshed adaptive results showed a hard ceiling around concentration ~1.38 for higher `c_target` values, which meant the attack was not expressive enough to test the full tradeoff claim and the aggregate table alone could not show whether the bottleneck came from candidate generation, target mismatch, or downstream filtering.
-- Risk / follow-up: This should make the next rerun much more interpretable, but it may still reveal that some targets remain unreachable under MiniLM. If the ceiling persists, inspect `adaptive_tradeoff_diagnostics.csv` first and then decide whether to further redesign the anchor family or narrow the reported adaptive range.
-
 ## Session 001 - Pipeline foundation
 - Files changed: `changes.md`, `experiments/common.py`, `evaluation/metrics.py`, `modules/agent_simulator.py`, `modules/baseline_defenses.py`, `modules/dsrm_simulator.py`, `experiments/run_sanity_check.py`, `experiments/run_roc_analysis.py`, `experiments/run_main_experiment.py`, `experiments/run_adaptive_attack.py`, `experiments/run_ablation.py`, `visualization/plot_results.py`, `README.md`, `RESULTS_COLLECTION_README.md`
 - What changed: Implemented the missing experiment pipeline, added shared loaders/output helpers, upgraded prototype defenses and white-box simulation, and turned plotting into a real figure regeneration step.
@@ -313,3 +307,21 @@ Updated `visualization/plot_results.py` to match the new saved-table schema:
 - `changes.md` - this entry
 
 ---
+
+## Session 008 - Expand adaptive attacker search space and save per-example diagnostics
+- Files changed: `changes.md`, `modules/dsrm_simulator.py`, `experiments/run_adaptive_attack.py`
+- What changed: Broadened the adaptive white-box candidate pool with more contrastive and exact-match anchor templates, recorded candidate-pool score range metadata on each generated attack, and made the adaptive experiment save a per-example diagnostics table (`results/tables/adaptive_tradeoff_diagnostics.csv`) alongside the aggregate tradeoff CSV.
+- Why the change was necessary: The refreshed adaptive results showed a hard ceiling around concentration ~1.38 for higher `c_target` values, which meant the attack was not expressive enough to test the full tradeoff claim and the aggregate table alone could not show whether the bottleneck came from candidate generation, target mismatch, or downstream filtering.
+- Risk / follow-up: This should make the next rerun much more interpretable, but it may still reveal that some targets remain unreachable under MiniLM. If the ceiling persists, inspect `adaptive_tradeoff_diagnostics.csv` first and then decide whether to further redesign the anchor family or narrow the reported adaptive range.
+
+## Session 009 - Reframe docs around DPR-primary reporting and retriever-separated artifacts
+- Files changed: `changes.md`, `README.md`, `RESULTS_COLLECTION_README.md`, `CQRCD_Implementation_Master.md`, `config.py`, `visualization/plot_results.py`
+- What changed: Reframed the repo narrative so DPR is the canonical final-evaluation retriever and MiniLM is the development/practical variant, documented a retriever-separated artifact layout (`results/dpr` vs `results/minilm`), updated the adaptive-attack language to scope conclusions by retriever, added `fig7_ablation_method` to the plotting pipeline, and taught `visualization.plot_results` to regenerate figures from any result directory via `--input-dir`.
+- Why the change was necessary: The measured results support the geometric/theoretical story much more strongly under DPR than MiniLM, while MiniLM remains useful but needs honest limitation framing. The repo docs previously mixed both settings into one generic `results/` narrative, which risked overstating MiniLM and obscuring which artifacts should be treated as canonical.
+- Risk / follow-up: The repo-side framing is now aligned, but the missing DPR neighbor-method ablation still has to be run from a working local Python environment and saved into `results/dpr` before the Claim 5 discussion can cite it as completed evidence.
+
+## Session 010 - Make concentration thresholds retriever-specific
+- Files changed: `changes.md`, `config.py`, `experiments/common.py`, `experiments/run_ablation.py`
+- What changed: Replaced the single shared concentration threshold with retriever-specific defaults (`1.20` for MiniLM, `1.05` for DPR), updated the shared CQRCD filter builder to pick the threshold from the retriever automatically unless explicitly overridden, and changed the ablation runner so DPR neighbor-count and neighbor-method rows are evaluated at the DPR-calibrated threshold instead of inheriting MiniLM's `1.20`.
+- Why the change was necessary: DPR ablation showed that `1.20` is badly miscalibrated for DPR (`optimal_threshold ≈ 1.05`), causing alarming but artificial rows such as `n=20` with `FNR=1.0`. That was a threshold-calibration artifact, not a real failure of the DPR geometry.
+- Risk / follow-up: A quick FPR sanity check at `tau ≈ 1.05` is still needed on legitimate DPR scores once `results/dpr/tables/cqrcd_detection_scores.csv` or an updated DPR ROC run is available.

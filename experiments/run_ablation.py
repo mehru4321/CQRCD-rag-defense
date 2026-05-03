@@ -6,7 +6,7 @@ import argparse
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from config import CONCENTRATION_THRESHOLD
+from config import get_retriever_threshold
 from evaluation.metrics import compute_detection_metrics, compute_threshold_metrics
 from experiments.common import (
     build_cqrcd_filter,
@@ -70,6 +70,12 @@ def build_bar_plot(df: pd.DataFrame, x_col: str, y_col: str, title: str, y_label
     return fig
 
 
+def threshold_sweep(retriever_name: str):
+    if retriever_name == 'dpr':
+        return [0.95, 1.0, 1.05, 1.1, 1.15, 1.2, 1.25]
+    return [1.2, 1.3, 1.4, 1.5, 1.65, 1.8, 2.0]
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description='Run Experiment 5 ablation study.')
     parser.add_argument('--retriever', default='minilm', choices=['minilm', 'dpr'])
@@ -84,20 +90,26 @@ def main() -> None:
         docs = sample_for_smoke(docs, limit=100)
 
     retriever = init_retriever(args.retriever)
+    eval_threshold = get_retriever_threshold(args.retriever)
     rows = []
 
     for n_neighbors in [1, 3, 5, 10, 20]:
-        filter_model = build_cqrcd_filter(retriever, smoke=args.smoke, n_neighbors=n_neighbors)
+        filter_model = build_cqrcd_filter(
+            retriever,
+            smoke=args.smoke,
+            n_neighbors=n_neighbors,
+            threshold=eval_threshold,
+        )
         labels, scores = gather_scores(filter_model, docs)
         rows.append(
             {
                 'ablation': 'neighbor_count',
                 'setting': n_neighbors,
-                **summarize_detection(labels, scores, threshold=filter_model.threshold),
+                **summarize_detection(labels, scores, threshold=eval_threshold),
             }
         )
 
-    for threshold in [1.2, 1.3, 1.4, 1.5, 1.65, 1.8, 2.0]:
+    for threshold in threshold_sweep(args.retriever):
         filter_model = build_cqrcd_filter(retriever, smoke=args.smoke, threshold=threshold)
         labels, scores = gather_scores(filter_model, docs)
         rows.append(
@@ -111,13 +123,14 @@ def main() -> None:
     for retriever_name in ['minilm', 'dpr']:
         try:
             current_retriever = init_retriever(retriever_name)
-            filter_model = build_cqrcd_filter(current_retriever, smoke=args.smoke)
+            current_threshold = get_retriever_threshold(retriever_name)
+            filter_model = build_cqrcd_filter(current_retriever, smoke=args.smoke, threshold=current_threshold)
             labels, scores = gather_scores(filter_model, docs)
             rows.append(
                 {
                     'ablation': 'retriever_backbone',
                     'setting': retriever_name,
-                    **summarize_detection(labels, scores, threshold=filter_model.threshold),
+                    **summarize_detection(labels, scores, threshold=current_threshold),
                 }
             )
         except Exception as exc:
@@ -148,14 +161,14 @@ def main() -> None:
     for variant_mode in ['mixed', 'thematic_only', 'synonym_only']:
         filter_model = build_cqrcd_filter(
             retriever, smoke=False, variant_mode=variant_mode,
-            threshold=CONCENTRATION_THRESHOLD,
+            threshold=eval_threshold,
         )
         labels, scores = gather_scores(filter_model, docs)
         rows.append(
             {
                 'ablation': 'neighbor_method',
                 'setting': variant_mode,
-                **summarize_detection(labels, scores, threshold=CONCENTRATION_THRESHOLD),
+                **summarize_detection(labels, scores, threshold=eval_threshold),
             }
         )
 
@@ -170,9 +183,9 @@ def main() -> None:
             'ablation': 'neighbor_method',
             'setting': 't5_mixed',
             **(
-                summarize_detection(labels, scores, threshold=CONCENTRATION_THRESHOLD)
+                summarize_detection(labels, scores, threshold=eval_threshold)
                 if t5_available
-                else {k: None for k in summarize_detection([0, 1], [0.0, 2.0], threshold=1.2)}
+                else {k: None for k in summarize_detection([0, 1], [0.0, 2.0], threshold=eval_threshold)}
             ),
         }
     )

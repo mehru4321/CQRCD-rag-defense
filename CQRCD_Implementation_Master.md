@@ -160,7 +160,7 @@ CSRM prompts from Appendix A of the base paper to generate actual DSRM documents
 | MiniLM | `sentence-transformers/all-MiniLM-L6-v2` | Secondary retriever |
 | ReaLM | `google/realm-cc-news-pretrained-embedder` | Tertiary retriever |
 
-**Default:** Use MiniLM for development (smallest, fastest). Switch to DPR for final evaluation.
+**Default:** Use MiniLM for development and debugging (smallest, fastest). Use DPR for final evaluation and for theory-facing paper claims.
 
 ### 3.2 Paraphrase Model (for neighbor generation)
 
@@ -818,7 +818,7 @@ the cost of 400 × LLM inference calls.
 
 ### Experiment 4: Adaptive Attacker Tradeoff
 
-**Goal:** Show that evading CQRCD forces the attacker to sacrifice attack effectiveness.
+**Goal:** Measure adaptive behavior honestly and scope conclusions by retriever.
 
 **What to run:**
 1. For target concentration scores C_target ∈ {1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.2, 2.5, 2.8}:
@@ -829,7 +829,7 @@ the cost of 400 × LLM inference calls.
    c. Measure ASR_A of these constrained adversarial docs
    d. Measure detection rate of CQRCD against these docs
 2. Plot both curves on same figure (Figure 5 equiv.)
-3. Expected: As C_target decreases (attacker evades), ASR_A also decreases
+3. For DPR, test whether lower C_target forces lower ASR_A. For MiniLM, report the measured tradeoff honestly even if low-concentration evasion remains effective.
 
 ---
 
@@ -842,7 +842,7 @@ the cost of 400 × LLM inference calls.
 | Variable | Values to Test | Metric |
 |----------|---------------|--------|
 | Neighbor count n | 1, 3, 5, 10, 20 | AUC, FNR, FPR |
-| Neighbor generation method | T5-paraphrase, embedding perturbation, random | AUC |
+| Neighbor generation method | mixed, thematic_only, synonym_only, t5_mixed | AUC |
 | Threshold τ_C | 1.3, 1.4, 1.5, 1.65, 1.8, 2.0 | FNR+FPR joint |
 | Similarity metric | cosine, inner product, L2 | AUC |
 | Retriever backbone | DPR, MiniLM, ReaLM | AUC, ASR_A |
@@ -1086,7 +1086,7 @@ Your implementation is successful if:
 2. **CQRCD AUC > 0.75** (target: 0.81, PPL baseline: 0.49)
 3. **ASR_A reduction ≥ 40%** (e.g., from 43% to <26%) with CQRCD active
 4. **FPR < 20%** at the operating threshold (legitimate docs not over-flagged)
-5. **Adaptive attacker curve shows ASR drop as C_target decreases** (monotonic relationship)
+5. **Adaptive attacker analysis is retriever-scoped:** any monotonic ASR drop claim must be supported by that retriever's measured curve, not assumed generically
 6. **Ablation confirms n=5 is near-optimal** (n=1 worse, n=10 marginally better)
 7. **All 6 required figures generated at 400 DPI**
 
