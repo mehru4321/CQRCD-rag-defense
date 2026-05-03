@@ -6,6 +6,7 @@ import argparse
 import matplotlib.pyplot as plt
 import pandas as pd
 
+from config import CONCENTRATION_THRESHOLD
 from evaluation.metrics import compute_detection_metrics, compute_threshold_metrics
 from experiments.common import (
     build_cqrcd_filter,
@@ -16,6 +17,7 @@ from experiments.common import (
     save_dataframe,
     save_figure,
 )
+from modules.neighbor_generator import NeighborGenerator
 
 
 def gather_scores(filter_model, docs):
@@ -50,6 +52,21 @@ def build_line_plot(df: pd.DataFrame, x_col: str, y_col: str, title: str, y_labe
     ax.set_title(title)
     ax.set_xlabel(x_col)
     ax.set_ylabel(y_label)
+    return fig
+
+
+def build_bar_plot(df: pd.DataFrame, x_col: str, y_col: str, title: str, y_label: str):
+    fig, ax = plt.subplots(figsize=(6.5, 4))
+    valid = df.dropna(subset=[y_col])
+    bars = ax.bar(valid[x_col].astype(str), valid[y_col])
+    # Label each bar with its value
+    for bar, val in zip(bars, valid[y_col]):
+        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.005,
+                f'{val:.3f}', ha='center', va='bottom', fontsize=9)
+    ax.set_title(title)
+    ax.set_xlabel(x_col)
+    ax.set_ylabel(y_label)
+    ax.set_ylim(0, 1.05)
     return fig
 
 
@@ -120,16 +137,45 @@ def main() -> None:
                 }
             )
 
-    for method, smoke_mode in [('t5_or_fallback', False), ('fallback_only', True)]:
-        filter_model = build_cqrcd_filter(retriever, smoke=smoke_mode)
+    # --- Neighbor method ablation ---
+    # Check T5 availability once upfront so we can report it clearly.
+    print("  Checking T5 paraphrase model availability...")
+    _t5_probe = NeighborGenerator(model_name='Vamsi/T5_Paraphrase_Paws', retriever=retriever)
+    t5_available = _t5_probe._ensure_model_loaded()
+    print(f"  T5 available: {t5_available}")
+
+    # Three guaranteed-distinct fallback conditions.
+    for variant_mode in ['mixed', 'thematic_only', 'synonym_only']:
+        filter_model = build_cqrcd_filter(
+            retriever, smoke=False, variant_mode=variant_mode,
+            threshold=CONCENTRATION_THRESHOLD,
+        )
         labels, scores = gather_scores(filter_model, docs)
         rows.append(
             {
                 'ablation': 'neighbor_method',
-                'setting': method,
-                **summarize_detection(labels, scores, threshold=filter_model.threshold),
+                'setting': variant_mode,
+                **summarize_detection(labels, scores, threshold=CONCENTRATION_THRESHOLD),
             }
         )
+
+    # T5 condition: neural paraphrase primary + mixed fallback.
+    if t5_available:
+        filter_model = build_cqrcd_filter(retriever, smoke=False, variant_mode='mixed')
+        labels, scores = gather_scores(filter_model, docs)
+    else:
+        labels, scores = [], []
+    rows.append(
+        {
+            'ablation': 'neighbor_method',
+            'setting': 't5_mixed',
+            **(
+                summarize_detection(labels, scores, threshold=CONCENTRATION_THRESHOLD)
+                if t5_available
+                else {k: None for k in summarize_detection([0, 1], [0.0, 2.0], threshold=1.2)}
+            ),
+        }
+    )
 
     df = pd.DataFrame(rows)
     save_dataframe(df, outputs['tables'] / 'ablation_results.csv')
@@ -146,6 +192,15 @@ def main() -> None:
     save_figure(
         build_line_plot(threshold_df, 'setting', 'threshold_error', 'Ablation: threshold', 'FNR + FPR'),
         outputs['figures'] / 'fig6_ablation_threshold',
+    )
+
+    method_df = df[df['ablation'] == 'neighbor_method'].copy()
+    method_labels = {'mixed': 'Mixed\n(thematic+syn)', 'thematic_only': 'Thematic\nonly',
+                     'synonym_only': 'Synonym\nonly', 't5_mixed': 'T5+Mixed'}
+    method_df['setting'] = method_df['setting'].map(lambda x: method_labels.get(x, x))
+    save_figure(
+        build_bar_plot(method_df, 'setting', 'auc', 'Ablation: neighbor generation method', 'ROC-AUC'),
+        outputs['figures'] / 'fig7_ablation_method',
     )
 
     print('Saved ablation outputs.')

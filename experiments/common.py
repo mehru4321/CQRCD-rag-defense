@@ -49,9 +49,13 @@ def init_retriever(name: str = DEFAULT_RETRIEVER):
     return DenseRetriever(name)
 
 
-def build_neighbor_generator(retriever, smoke: bool = False):
+def build_neighbor_generator(retriever, smoke: bool = False, variant_mode: str = 'thematic_only'):
+    # T5 is used as primary paraphrase model when available; variant_mode controls
+    # the fallback strategy.  'thematic_only' is the production default because
+    # aspect-shifted templates (cosine ~0.70-0.80) produce better score separation
+    # than semantic paraphrases (cosine ~0.85-0.92) — see neighbor_method ablation.
     model_name = None if smoke else "Vamsi/T5_Paraphrase_Paws"
-    return NeighborGenerator(model_name=model_name, retriever=retriever)
+    return NeighborGenerator(model_name=model_name, retriever=retriever, variant_mode=variant_mode)
 
 
 def build_cqrcd_filter(
@@ -59,8 +63,9 @@ def build_cqrcd_filter(
     smoke: bool = False,
     threshold: float = CONCENTRATION_THRESHOLD,
     n_neighbors: int = N_NEIGHBORS,
+    variant_mode: str = 'thematic_only',
 ):
-    ng = build_neighbor_generator(retriever, smoke=smoke)
+    ng = build_neighbor_generator(retriever, smoke=smoke, variant_mode=variant_mode)
     return CQRCDFilter(
         retriever=retriever,
         neighbor_generator=ng,

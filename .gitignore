@@ -28,3 +28,6 @@ results/*
 data/raw_asb/
 data/adversarial*.json
 
+# Claude
+.claude/
+

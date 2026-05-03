@@ -150,13 +150,23 @@ class NeighborGenerator:
         num_beams: int = PARAPHRASE_NUM_BEAMS,
         max_length: int = PARAPHRASE_MAX_LENGTH,
         seed: int = RANDOM_SEED,
+        variant_mode: str = 'mixed',
     ):
+        """
+        Args:
+            variant_mode: Controls which fallback variant strategy is used when T5
+                is unavailable or not requested.
+                - 'mixed'         : thematic templates + synonym substitutions (default)
+                - 'thematic_only' : aspect-shifted question templates only (~cosine 0.70-0.80)
+                - 'synonym_only'  : word-level synonym substitutions only (~cosine 0.82-0.92)
+        """
         self.model_name = model_name
         self.default_n = n
         self.device = device
         self._cache: dict = {}
 
         self._model_loaded = False
+        self._load_attempted = False  # prevents repeated failed-load warnings
         self._tokenizer = None
         self._model = None
         self._num_beams = num_beams
@@ -165,6 +175,7 @@ class NeighborGenerator:
 
         self.retriever = retriever
         self.min_similarity = float(min_similarity)
+        self.variant_mode = variant_mode
 
     # ------------------------------------------------------------------
     # Thematic variant helpers (Session 005)
@@ -226,23 +237,22 @@ class NeighborGenerator:
         """
         Generate semantically diverse paraphrases without a neural model.
 
-        Strategy (in order):
-          0. Thematic variants: aspect-shifted questions (cosine ~0.70-0.80).
-             These are the most important for CQRCD concentration separation.
-          1. Single-term synonym substitution across all known terms.
-          2. Double-term substitution using a second pass on the first variants.
-          3. Structural transformation: imperative → interrogative.
-          4. Framing prefix variants.
-          5. Deterministic padding.
+        Strategy controlled by self.variant_mode:
+          'mixed'         — Round 0 (thematic) + Rounds 1-4 (synonym/structural)
+          'thematic_only' — Round 0 only: aspect-shifted templates (cosine ~0.70-0.80)
+          'synonym_only'  — Rounds 1-4 only: synonym substitutions (cosine ~0.82-0.92)
 
-        Round 0 targets MiniLM cosine ~0.70-0.80; Rounds 1-4 target ~0.82-0.92.
-        Mixing them lowers the mean denominator in C(d,Q), pushing C_bb above
-        threshold 1.20 while C_legit stays near 1.05.
+        The 'mixed' mode lowers the mean denominator in C(d,Q) by blending
+        lower-cosine thematic variants with higher-cosine synonym variants,
+        pushing C_bb above threshold 1.20 while C_legit stays near 1.05.
         """
         q_lower = query.lower().strip()
         words = query.split()
         seen: set = {q_lower}
         variants: List[str] = []
+
+        use_thematic = self.variant_mode in ('mixed', 'thematic_only')
+        use_synonym = self.variant_mode in ('mixed', 'synonym_only')
 
         def add(v: str) -> bool:
             v = v.strip()
@@ -251,7 +261,6 @@ class NeighborGenerator:
             vl = v.lower()
             if vl == q_lower or vl in seen:
                 return False
-            # Require at least one word to differ (not just capitalisation)
             if vl.replace(' ', '') == q_lower.replace(' ', ''):
                 return False
             seen.add(vl)
@@ -259,26 +268,41 @@ class NeighborGenerator:
             return True
 
         # --- Round 0: thematic variants (aspect-shifted, cosine ~0.70-0.80) ---
-        for v in self._thematic_variants(query, n):
-            add(v)
-            if len(variants) >= n:
-                return variants[:n]
+        if use_thematic:
+            # In 'mixed' mode cap thematic at ceil(n/2) so synonym variants
+            # (Round 1) always contribute distinct neighbours.  In
+            # 'thematic_only' mode fill the full budget.
+            thematic_budget = n if self.variant_mode == 'thematic_only' else (n + 1) // 2
+            for v in self._thematic_variants(query, thematic_budget):
+                add(v)
+                if len(variants) >= thematic_budget:
+                    break
 
-        # --- Round 1: single-term substitutions ---
-        for round_idx in range(4):
-            candidate = self._apply_subs(query, round_idx)
-            add(candidate)
-            if len(variants) >= n:
-                return variants[:n]
+        if self.variant_mode == 'thematic_only':
+            # Thematic templates max out at 8; pad deterministically if needed.
+            for i in range(n + 5):
+                add(f"{query} from a broader perspective {i}")
+                if len(variants) >= n:
+                    break
+            return variants[:n]
 
-        # --- Round 2: double substitution (apply subs to round-1 variants) ---
-        round1_base = variants[:min(3, len(variants))]
-        for base in round1_base:
-            for round_idx in range(1, 4):
-                candidate = self._apply_subs(base, round_idx)
+        # --- Round 1: single-term substitutions (synonym_only / mixed) ---
+        if use_synonym:
+            synonym_start = len(variants)
+            for round_idx in range(4):
+                candidate = self._apply_subs(query, round_idx)
                 add(candidate)
                 if len(variants) >= n:
                     return variants[:n]
+
+            # --- Round 2: double substitution on round-1 synonym outputs ---
+            round1_base = variants[synonym_start:synonym_start + 3]
+            for base in round1_base:
+                for round_idx in range(1, 4):
+                    candidate = self._apply_subs(base, round_idx)
+                    add(candidate)
+                    if len(variants) >= n:
+                        return variants[:n]
 
         # --- Round 3: structural transformation ---
         if words:
@@ -324,15 +348,17 @@ class NeighborGenerator:
 
     def _ensure_model_loaded(self) -> bool:
         if not self.model_name:
-            self._model_loaded = False
             return False
         if self._model_loaded:
             return True
+        if self._load_attempted:
+            return False
+        self._load_attempted = True
         try:
             from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
             import torch  # noqa: F401
-        except Exception:
-            self._model_loaded = False
+        except Exception as exc:
+            print(f"[NeighborGenerator] WARNING: transformers/torch unavailable — {exc}. Using fallback variants.")
             return False
         try:
             self._tokenizer = AutoTokenizer.from_pretrained(self.model_name)
@@ -340,9 +366,10 @@ class NeighborGenerator:
             self._model.to(self.device)
             self._model.eval()
             self._model_loaded = True
+            print(f"[NeighborGenerator] T5 paraphrase model loaded: {self.model_name}")
             return True
-        except Exception:
-            self._model_loaded = False
+        except Exception as exc:
+            print(f"[NeighborGenerator] WARNING: T5 model '{self.model_name}' failed to load — {exc}. Using fallback variants.")
             return False
 
     def _paraphrase_with_t5(self, query: str, n: int) -> List[str]:
